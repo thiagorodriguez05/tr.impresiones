@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tr.impresiones — Impresión 3D</title>
+  <link rel="icon" href="img/logo.png" type="image/png">
+  <!-- SEO -->
+  <meta name="description" content="Impresión 3D personalizada en Argentina. Diseños únicos, figuras, llaveros y más. Envíos a todo el país.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <button type="button" class="nav-cart" onclick="toggleCart()">
+    🛒 <span>Carrito</span>
+    <span class="cart-badge" id="cartBadge">0</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+
+  <!-- LOGO -->
+  <img src="img/logo.png" alt="tr.impresiones" class="hero-logo">
+
+  <!-- NOMBRE EMPRENDIMIENTO -->
+  <h1 class="hero-title">tr.impresiones</h1>
+
+  <!-- TAGLINE -->
+  <div class="hero-tag">✦ Impresión 3D personalizada</div>
+
+  <!-- TEXTO -->
+  <p>Tus ideas en plástico, capa a capa. Pedidos personalizados o del catálogo, 
+    entrega a todo el país.</p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">⏱</div>
+      <div class="stat-val">24–72 hs</div>
+      <div class="stat-label">Tiempo de producción según complejidad</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🚚</div>
+      <div class="stat-val">Todo el país</div>
+      <div class="stat-label">Envíos o retiro en Lomas de Zamora</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🧱</div>
+      <div class="stat-val">PLA · PETG · ABS</div>
+      <div class="stat-label">Materiales resistentes y livianos</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">🎨</div>
+      <div class="stat-val">+20 colores</div>
+      <div class="stat-label">Consultá disponibilidad</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">💳</div>
+      <div class="stat-val">Transferencia</div>
+      <div class="stat-label">Efectivo · MercadoPago</div>
+    </div>
+  </div>
+</div>
+
+<!-- CATÁLOGO -->
+<section class="section">
+  <div class="section-title">Catálogo</div>
+
+  <div class="filters">
+    <button type="button" class="filter-btn active" onclick="filterProducts('all', this)">Todo</button>
+    <button type="button" class="filter-btn" onclick="filterProducts('jardin', this)">Jardin</button>
+    <button type="button" class="filter-btn" onclick="filterProducts('dummy', this)">Dummy</button>
+    <button type="button" class="filter-btn" onclick="filterProducts('chop', this)">Chop</button>
+    <button type="button" class="filter-btn" onclick="filterProducts('jarra', this)">Jarra</button>
+    <button type="button" class="filter-btn" onclick="filterProducts('cartel', this)">Cartel</button>
+    <button type="button" class="filter-btn" onclick="filterProducts('cosplay', this)">Cosplay</button>
+    <button type="button" class="filter-btn" onclick="filterProducts('flex', this)">Flex</button>
+    <button type="button" class="filter-btn" onclick="filterProducts('llavero', this)">Llavero</button>
+    <button type="button" class="filter-btn" onclick="filterProducts('soporteCelular', this)">Soporte Celular</button>
+  </div>
+
+  <!-- Loader -->
+  <div id="loader" style="text-align:center; padding:40px;">
+    Cargando productos...
+  </div>
+
+  <div class="products" id="productsGrid"></div>
+</section>
+
+<!-- CONTACTO -->
+<div class="contact-section">
+  <h2>¿Tenés algo especial en mente?</h2>
+  <p>Mandá tu archivo STL o descripción y te cotizamos sin cargo.</p>
+
+  <div class="contact-grid">
+    <div class="contact-chip">📍 <span>Lomas de Zamora, GBA</span></div>
+    <div class="contact-chip">📦 <span>Envíos a todo el país</span></div>
+    <div class="contact-chip">💬 Pedidos por <span>WhatsApp</span></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  tr.impresiones © 2025 — Lomas de Zamora, Buenos Aires
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalIfOutside(event)">
+  <div class="modal" id="modal">
+    
+    <div style="position:relative">
+      <button type="button" class="modal-close-btn" onclick="closeModal()">✕</button>
+
+      <div class="modal-gallery" id="modalGallery">
+        <div class="modal-gallery-inner" id="galleryInner"></div>
+
+        <button type="button" class="gallery-prev" id="galleryPrev" onclick="slideGallery(-1)">‹</button>
+        <button type="button" class="gallery-next" id="galleryNext" onclick="slideGallery(1)">›</button>
+
+        <div class="gallery-dots" id="galleryDots"></div>
+      </div>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-cat" id="modalCat"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+
+      <div class="modal-footer">
+        <div class="modal-price" id="modalPrice"></div>
+
+        <div class="modal-actions">
+          <button type="button" class="modal-add-btn" id="modalAddBtn" onclick="addFromModal()">
+            + Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CARRITO -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <div class="cart-title">Tu carrito</div>
+    <button type="button" class="close-btn" onclick="toggleCart()">✕</button>
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-val" id="cartTotal">$0</span>
+    </div>
+
+    <button type="button" class="wa-btn" onclick="whatsapp()">
+      📱 Enviar pedido por WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- SCRIPT -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
