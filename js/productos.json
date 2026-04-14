@@ -1,93 +1,93 @@
 [
   {
-     "id": "jardin-mariposa",
+     "id": "didactico-mariposa",
     "nombre": "Mariposa Ciclo de Vida",
     "precio": 25000,
-    "categoria": "jardin",
+    "categoria": "didactico",
     "descripcion": "Material didáctico en impresión 3D 🖨️ que representa el ciclo de vida de la mariposa 🦋. Perfecto para jardín 🌈: aprendizaje visual interactivo y súper llamativo 👶📖.",
     "imagenes": [
-      "img/mariposa/mariposa_ciclo.png",
-      "img/mariposa/mariposa_ciclo2.png",
-      "img/mariposa/mariposa_ciclo3.png"]
+      "img/didactico/mariposa/mariposa_ciclo.png",
+      "img/didactico/mariposa/mariposa_ciclo2.png",
+      "img/didactico/mariposa/mariposa_ciclo3.png"]
   },
   {
      "id": "chop-boca",
     "nombre": "Chop Boca",
     "precio": 18000,
-    "categoria": "chop",
+    "categoria": "chop/jarra",
     "descripcion": "Chop de Boca Juniors de 500cc realizado en impresión 3D 🖨️. Ideal para disfrutar tus bebidas 🍺 y demostrar tu pasión por el club ⚽.",
     "imagenes": [
-      "img/chop/boca/chop_boca.png",
-    "img/chop/boca/chop_boca2.png",
-    "img/chop/boca/chop_boca3.png"]
+      "img/chop-jarra/chop/boca/chop_boca.png",
+    "img/chop-jarra/chop/boca/chop_boca2.png",
+    "img/chop-jarra/chop/boca/chop_boca3.png"]
   },
   {
-     "id": "cartel-ironMaiden",
+     "id": "decoracion-ironMaiden",
     "nombre": "Iron Miden Cartel Luminoso",
     "precio": 22000,
-    "categoria": "cartel",
+    "categoria": "decoracion",
     "descripcion": "Cartel de Iron Maiden en impresión 3D 🖨️ con luces LED 💡. Ideal para decorar tu espacio y darle un estilo rockero único 🎸.",
     "imagenes": [
-      "img/cartel/ironMaiden/iron_maiden.png",
-      "img/cartel/ironMaiden/iron_maiden2.png",
-      "img/cartel/ironMaiden/iron_maiden3.png"
+      "img/decoracion/ironMaiden/iron_maiden.png",
+      "img/decoracion/ironMaiden/iron_maiden2.png",
+      "img/decoracion/ironMaiden/iron_maiden3.png"
     ]
   },
     {
      "id": "jarra-racing",
     "nombre": "Jarra Racing",
     "precio": 15000,
-    "categoria": "jarra",
+    "categoria": "chop/jarra",
     "descripcion": "Jarra de Racing de 500cc realizada en impresión 3D 🖨️. Ideal para disfrutar tus bebidas 🍺 y demostrar tu pasión ⚽",
     "imagenes": [
-      "img/jarra/racing/racing_jarra.png",
-      "img/jarra/racing/racing_jarra2.png"
+      "img/chop-jarra/jarra/racing/racing_jarra.png",
+      "img/chop-jarra/jarra/racing/racing_jarra2.png"
     ]
   },
       {
      "id": "jarra-boca",
     "nombre": "Jarra Boca",
     "precio": 15000,
-    "categoria": "jarra",
+    "categoria": "chop/jarra",
     "descripcion": "Jarra de Boca de 500cc realizada en impresión 3D 🖨️. Ideal para disfrutar tus bebidas 🍺 y demostrar tu pasión ⚽",
     "imagenes": [
-      "img/jarra/boca/jarra_boca.png",
-      "img/jarra/boca/jarra_boca2.png"
+      "img/chop-jarra/jarra/boca/jarra_boca.png",
+      "img/chop-jarra/jarra/boca/jarra_boca2.png"
     ]
   },
         {
      "id": "dummy-springtrap",
     "nombre": "Dummy Springtrap",
     "precio": 18000,
-    "categoria": "dummy",
+    "categoria": "figura",
     "descripcion": "JDummy articulado de Springtrap de 15 cm en impresión 3D 🖨️. Totalmente móvil, ideal para coleccionar, decorar o recrear poses 🎮",
     "imagenes": [
-      "img/dummy/springtrap/springtrap.png",
-      "img/dummy/springtrap/springtrap2.png",
-      "img/dummy/springtrap/springtrap3.png"
+      "img/figura/dummy/springtrap/springtrap.png",
+      "img/figura/dummy/springtrap/springtrap2.png",
+      "img/figura/dummy/springtrap/springtrap3.png"
     ]
   },
   {
      "id": "cartel-onePiece",
     "nombre": "Cartel One Piece",
     "precio": 14000,
-    "categoria": "cartel",
+    "categoria": "decoracion",
     "descripcion": "Cartel de One Piece ☠️🏴‍☠️ de 26 cm en impresión 3D 🖨️. Ideal para decorar tu habitación, setup o rincón otaku. ¡Llevá tu pasión al siguiente nivel! 🔥",
     "imagenes": [
-      "img/cartel/onePiece/cartel_onePiece.png",
-      "img/cartel/onePiece/cartel_onePiece2.png"
+      "img/decoracion/onePiece/cartel_onePiece.png",
+      "img/decoracion/onePiece/cartel_onePiece2.png"
     ]
   },
   {
      "id": "dummy-mohawkMark",
     "nombre": "Dummy Mohawk Mark",
     "precio": 16000,
-    "categoria": "dummy",
+    "categoria": "figura",
     "descripcion": "Dummy articulado de Invencible (Mark variante Mohawk) de 15 cm en impresión 3D 🖨️. Totalmente móvil, ideal para coleccionar, decorar o recrear poses.",
     "imagenes": [
-      "img/dummy/invencible/mohawk_mark.png",
-      "img/dummy/invencible/mohawk_mark2.png",
-      "img/dummy/invencible/mohawk_mark3.png"
+      "img/figura/dummy/invencible/mohawk_mark.png",
+      "img/figura/dummy/invencible/mohawk_mark2.png",
+      "img/figura/dummy/invencible/mohawk_mark3.png"
     ]
   },
     {
@@ -104,33 +104,22 @@
      "id": "flex-ikranAvatar",
     "nombre": "Flex Ikran Avatar",
     "precio": 16000,
-    "categoria": "flex",
+    "categoria": "figura",
     "descripcion": "Ikran de Avatar de 30 cm en impresión 3D 🖨️. Modelo flexible, detallado y perfecto para fans del mundo de Pandora. ¡Una pieza única para tu colección!",
     "imagenes": [
-      "img/flex/avatar/ikran_avatar.png",
-      "img/flex/avatar/ikran_avatar2.png"
+      "img/figura/flex/avatar/ikran_avatar.png",
+      "img/figura/flex/avatar/ikran_avatar2.png"
     ]
   },
      {
      "id": "llavero-argentina",
-    "nombre": "Llavero Argentina",
+    "nombre": "Llavero + Soporte celular Argentina",
     "precio": 5000,
-    "categoria": "llavero",
+    "categoria": "utiles",
     "descripcion": "Llavero de Argentina 🇦🇷 en impresión 3D 🖨️ que también funciona como soporte para celular 📱. Compacto, práctico e ideal para usar en cualquier lugar.",
     "imagenes": [
-      "img/llavero/argentina/llavero_argentina.png",
-      "img/llavero/argentina/llavero_argentina2.png"
-    ]
-  },
-     {
-     "id": "soporteCelu-argentina",
-    "nombre": "Soporte Celu Argentina",
-    "precio": 5000,
-    "categoria": "soporteCelular",
-    "descripcion": "Llavero de Argentina 🇦🇷 en impresión 3D 🖨️ que también funciona como soporte para celular 📱. Compacto, práctico e ideal para usar en cualquier lugar.",
-    "imagenes": [
-      "img/soporteCelu/argentina/soporte_argentina.png",
-      "img/soporteCelu/argentina/soporte_argentina2.png"
+      "img/utiles/llavero/argentina/llavero_argentina.png",
+      "img/utiles/llavero/argentina/llavero_argentina2.png"
     ]
   }
 ]
