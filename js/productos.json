@@ -4,6 +4,8 @@
     "nombre": "Mariposa Ciclo de Vida",
     "precio": 25000,
     "categoria": "didactico",
+    "stock": 10,
+    "destacado": true,
     "descripcion": "Material didáctico en impresión 3D 🖨️ que representa el ciclo de vida de la mariposa 🦋. Perfecto para jardín 🌈: aprendizaje visual interactivo y súper llamativo 👶📖.",
     "imagenes": [
       "img/didactico/mariposa/mariposa_ciclo.png",
@@ -15,7 +17,9 @@
     "id": "chop-boca",
     "nombre": "Chop Boca",
     "precio": 18000,
-    "categoria": "chop/jarra",
+    "categoria": "chop",
+    "stock": 8,
+    "destacado": true,
     "descripcion": "Chop de Boca Juniors de 500cc realizado en impresión 3D 🖨️. Ideal para disfrutar tus bebidas 🍺 y demostrar tu pasión por el club ⚽.",
     "imagenes": [
       "img/chop-jarra/chop/boca/chop_boca.png",
@@ -28,6 +32,8 @@
     "nombre": "Cartel Iron Maiden Luminoso",
     "precio": 22000,
     "categoria": "decoracion",
+    "stock": 5,
+    "destacado": true,
     "descripcion": "Cartel de Iron Maiden en impresión 3D 🖨️ con luces LED 💡. Ideal para decorar tu espacio y darle un estilo rockero único 🎸.",
     "imagenes": [
       "img/decoracion/ironMaiden/iron_maiden.png",
@@ -39,7 +45,9 @@
     "id": "jarra-racing",
     "nombre": "Jarra Racing",
     "precio": 15000,
-    "categoria": "chop/jarra",
+    "categoria": "jarra",
+    "stock": 12,
+    "destacado": false,
     "descripcion": "Jarra de Racing de 500cc realizada en impresión 3D 🖨️. Ideal para disfrutar tus bebidas 🍺 y demostrar tu pasión ⚽.",
     "imagenes": [
       "img/chop-jarra/jarra/racing/racing_jarra.png",
@@ -50,7 +58,9 @@
     "id": "jarra-boca",
     "nombre": "Jarra Boca",
     "precio": 15000,
-    "categoria": "chop/jarra",
+    "categoria": "jarra",
+    "stock": 10,
+    "destacado": false,
     "descripcion": "Jarra de Boca Juniors de 500cc realizada en impresión 3D 🖨️. Ideal para disfrutar tus bebidas 🍺 y demostrar tu pasión ⚽.",
     "imagenes": [
       "img/chop-jarra/jarra/boca/jarra_boca.png",
@@ -62,6 +72,8 @@
     "nombre": "Dummy Springtrap",
     "precio": 18000,
     "categoria": "figura",
+    "stock": 6,
+    "destacado": true,
     "descripcion": "Dummy articulado de Springtrap de 15 cm en impresión 3D 🖨️. Totalmente móvil, ideal para coleccionar, decorar o recrear poses 🎮.",
     "imagenes": [
       "img/figura/dummy/springtrap/springtrap.png",
@@ -74,6 +86,8 @@
     "nombre": "Cartel One Piece",
     "precio": 14000,
     "categoria": "decoracion",
+    "stock": 7,
+    "destacado": true,
     "descripcion": "Cartel de One Piece ☠️🏴‍☠️ de 26 cm en impresión 3D 🖨️. Ideal para decorar tu habitación, setup o rincón otaku 🔥.",
     "imagenes": [
       "img/decoracion/onePiece/cartel_onePiece.png",
@@ -85,6 +99,8 @@
     "nombre": "Dummy Mohawk Mark",
     "precio": 16000,
     "categoria": "figura",
+    "stock": 9,
+    "destacado": false,
     "descripcion": "Dummy articulado de Invencible (Mark variante Mohawk) de 15 cm en impresión 3D 🖨️. Totalmente móvil, ideal para coleccionar, decorar o recrear poses.",
     "imagenes": [
       "img/figura/dummy/invencible/mohawk/mohawk_mark.png",
@@ -97,6 +113,8 @@
     "nombre": "Cosplay Flins Lantern",
     "precio": 40000,
     "categoria": "cosplay",
+    "stock": 3,
+    "destacado": true,
     "descripcion": "Linterna de Genshin de 22 cm en impresión 3D 🖨️. Perfecta para cosplay, sesiones de fotos o eventos. Liviana, detallada y lista para destacar ✨.",
     "imagenes": [
       "img/cosplay/genshin/genshin_linterna.png"
@@ -107,6 +125,8 @@
     "nombre": "Flex Ikran Avatar",
     "precio": 16000,
     "categoria": "figura",
+    "stock": 8,
+    "destacado": true,
     "descripcion": "Ikran de Avatar de 30 cm en impresión 3D 🖨️. Modelo flexible, detallado y perfecto para fans de Pandora 🌌. Una pieza única para tu colección.",
     "imagenes": [
       "img/figura/flex/avatar/ikran_avatar.png",
@@ -118,6 +138,8 @@
     "nombre": "Llavero + Soporte Celular Argentina",
     "precio": 5000,
     "categoria": "utiles",
+    "stock": 20,
+    "destacado": false,
     "descripcion": "Llavero de Argentina 🇦🇷 en impresión 3D 🖨️ que también funciona como soporte para celular 📱. Compacto, práctico e ideal para usar en cualquier lugar.",
     "imagenes": [
       "img/utiles/llavero/argentina/llavero_argentina.png",
@@ -129,6 +151,8 @@
     "nombre": "Dummy Mark",
     "precio": 16000,
     "categoria": "figura",
+    "stock": 7,
+    "destacado": false,
     "descripcion": "Dummy articulado de Invencible (Mark) de 15 cm en impresión 3D 🖨️. Totalmente móvil, ideal para coleccionar, decorar o recrear poses.",
     "imagenes": [
       "img/figura/dummy/invencible/mark/mark.png",
@@ -140,29 +164,35 @@
     "nombre": "Llavero Stranger Things",
     "precio": 13000,
     "categoria": "utiles",
+    "stock": 15,
+    "destacado": true,
     "descripcion": "Llavero inspirado en Stranger Things impreso en 3D 🖨️. Diseño único, liviano y resistente, ideal para fans de la serie. Perfecto para llaves, mochilas o regalar 🎁.",
     "imagenes": [
       "img/utiles/llavero/stranger/strangerThings.png",
       "img/utiles/llavero/stranger/strangerThings2.png"
     ]
   },
-    {
+  {
     "id": "dummy-ironMan",
     "nombre": "Dummy Iron Man",
     "precio": 20000,
     "categoria": "figura",
-    "descripcion": "Dummy articulado de Iron Man de 22 cm en impresión 3D 🖨️. Diseño detallado inspirado en el universo de :contentReference[oaicite:0]{index=0}. Totalmente móvil, ideal para coleccionar, decorar o recrear poses épicas.",
+    "stock": 6,
+    "destacado": true,
+    "descripcion": "Dummy articulado de Iron Man de 22 cm en impresión 3D 🖨️. Diseño detallado inspirado en el universo Marvel. Totalmente móvil, ideal para coleccionar, decorar o recrear poses épicas.",
     "imagenes": [
       "img/figura/dummy/ironMan/ironMan.png",
       "img/figura/dummy/ironMan/ironMan2.png"
     ]
   },
-      {
+  {
     "id": "decoracion-onePiece",
     "nombre": "Kit Imanes One Piece",
     "precio": 10500,
     "categoria": "decoracion",
-    "descripcion": "¡Llevate el mundo de One Piece a tu casa!☠️🔥\n Kit de imanes impresos en 3D 🖨️ con diseños únicos y súper detallados. Perfectos para fanáticos que quieren decorar su heladera, setup o cualquier rincón con espíritu pirata.",
+    "stock": 11,
+    "destacado": true,
+    "descripcion": "¡Llevate el mundo de One Piece a tu casa! ☠️🔥 Kit de imanes impresos en 3D 🖨️ con diseños únicos y súper detallados. Perfectos para decorar tu heladera, setup o cualquier rincón con espíritu pirata.",
     "imagenes": [
       "img/decoracion/onePiece/iman/imanOnePiece.png"
     ]

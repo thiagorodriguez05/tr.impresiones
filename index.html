@@ -19,10 +19,29 @@
 
 <!-- NAV -->
 <nav class="nav">
+
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+   <div class="side-menu" id="sideMenu">
+    <h3>Categorías</h3>
+
+    <button onclick="filter('all')">Todos</button>
+    <button onclick="filter('didactico')">Didácticos</button>
+    <button onclick="filter('figura')">Figuras</button>
+    <button onclick="filter('decoracion')">Decoracion</button>
+    <button onclick="filter('utiles')">Utiles</button>
+    <button onclick="filter('cosplay')">Cosplay</button>
+    <button onclick="filter('jarra')">Jarra</button>
+     <button onclick="filter('chop')">Chop</button>
+
+    
+  </div>
+
   <button type="button" class="nav-cart" onclick="toggleCart()">
     🛒 <span>Carrito</span>
     <span class="cart-badge" id="cartBadge">0</span>
   </button>
+
+  <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 </nav>
 
 <!-- HERO -->
@@ -76,17 +95,8 @@
 
 <!-- CATÁLOGO -->
 <section class="section">
-  <div class="section-title">Catálogo</div>
+  <div class="section-title">Productos</div>
 
-  <div class="filters">
-    <button type="button" class="filter-btn active" onclick="filterProducts('all', this)">Todo</button>
-    <button type="button" class="filter-btn" onclick="filterProducts('didactico', this)">Didactico</button>
-    <button type="button" class="filter-btn" onclick="filterProducts('figura', this)">Figura</button>
-    <button type="button" class="filter-btn" onclick="filterProducts('chop/jarra', this)">Chop/Jarra</button>
-    <button type="button" class="filter-btn" onclick="filterProducts('decoracion', this)">Decoracion</button>
-    <button type="button" class="filter-btn" onclick="filterProducts('cosplay', this)">Cosplay</button>
-    <button type="button" class="filter-btn" onclick="filterProducts('utiles', this)">Utiles</button>
-  </div>
 
   <!-- Loader -->
   <div id="loader" style="text-align:center; padding:40px;">
