@@ -17,32 +17,31 @@
 
 <body>
 
-<!-- NAV -->
 <nav class="nav">
-
   <button class="menu-btn" onclick="toggleMenu()">☰</button>
-   <div class="side-menu" id="sideMenu">
-    <h3>Categorías</h3>
-
-    <button onclick="filter('all')">Todos</button>
-    <button onclick="filter('didactico')">Didácticos</button>
-    <button onclick="filter('figura')">Figuras</button>
-    <button onclick="filter('decoracion')">Decoracion</button>
-    <button onclick="filter('utiles')">Utiles</button>
-    <button onclick="filter('cosplay')">Cosplay</button>
-    <button onclick="filter('jarra')">Jarra</button>
-     <button onclick="filter('chop')">Chop</button>
-
-    
-  </div>
 
   <button type="button" class="nav-cart" onclick="toggleCart()">
     🛒 <span>Carrito</span>
     <span class="cart-badge" id="cartBadge">0</span>
   </button>
-
-  <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 </nav>
+
+<!-- MENU -->
+<div class="side-menu" id="sideMenu">
+  <h3>Categorías</h3>
+
+<button onclick="filter('all'); toggleMenu()">Todos</button>
+<button onclick="filter('didactico'); toggleMenu()">Didácticos</button>
+<button onclick="filter('figura'); toggleMenu()">Figuras</button>
+<button onclick="filter('decoracion'); toggleMenu()">Decoracion</button>
+<button onclick="filter('utiles'); toggleMenu()">Utiles</button>
+<button onclick="filter('cosplay'); toggleMenu()">Cosplay</button>
+<button onclick="filter('jarra'); toggleMenu()">Jarra</button>
+<button onclick="filter('chop'); toggleMenu()">Chop</button>
+</div>
+
+<!-- OVERLAY -->
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
 <!-- HERO -->
 <div class="hero">

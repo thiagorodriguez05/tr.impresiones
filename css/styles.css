@@ -536,20 +536,11 @@ footer {
   cursor: pointer;
 }
 
-/* overlay */
-.menu-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  z-index: 150;
-}
-
-/* PANEL LATERAL IZQUIERDA */
+/* ===== MENÚ LATERAL ===== */
 .side-menu {
   position: fixed;
   top: 0;
-  left: -280px; /* 👈 oculto a la izquierda */
+  left: -280px;
   width: 280px;
   height: 100vh;
   background: #0e0e18;
@@ -557,38 +548,49 @@ footer {
   padding: 1.5rem;
   transition: 0.3s ease;
   z-index: 200;
+
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* cuando abre */
 .side-menu.open {
-  left: 0; /* 👈 entra desde la izquierda */
+  left: 0;
 }
 
-.menu-overlay.open {
-  display: block;
-}
-
-/* botones */
+/* ===== TÍTULO ===== */
 .side-menu h3 {
   font-family: 'Space Mono', monospace;
   color: #a78bfa;
   margin-bottom: 10px;
 }
 
+/* ===== BOTONES CATEGORÍAS ===== */
 .side-menu button {
   background: transparent;
   border: 1px solid #2a2a3e;
   color: #e8e6f0;
-  padding: 10px;
+
+  padding: 12px;
   border-radius: 8px;
+
   text-align: left;
   cursor: pointer;
+
+  font-size: 0.9rem;
+  transition: all 0.2s;
 }
 
+/* hover */
 .side-menu button:hover {
+  background: rgba(167,139,250,0.15);
+  border-color: #a78bfa;
+  color: #a78bfa;
+}
+
+/* activo */
+.side-menu button.active {
   background: #a78bfa;
   color: #0a0a0f;
+  border-color: #a78bfa;
 }
