@@ -6,7 +6,7 @@
     "categoria": "didactico",
     "stock": 10,
     "destacado": true,
-    "descripcion": "Material didáctico en impresión 3D 🖨️ que representa el ciclo de vida de la mariposa 🦋. Perfecto para jardín 🌈: aprendizaje visual interactivo y súper llamativo 👶📖.",
+    "descripcion": "Material didáctico en impresión 3D diseñado para enseñar el ciclo de vida de la mariposa de forma visual y práctica. Ideal para nivel inicial, permite a los niños aprender jugando y explorando cada etapa de manera clara y atractiva.",
     "imagenes": [
       "img/didactico/mariposa/mariposa_ciclo.png",
       "img/didactico/mariposa/mariposa_ciclo2.png",
@@ -20,11 +20,10 @@
     "categoria": "chop",
     "stock": 8,
     "destacado": true,
-    "descripcion": "Chop de Boca Juniors de 500cc realizado en impresión 3D 🖨️. Ideal para disfrutar tus bebidas 🍺 y demostrar tu pasión por el club ⚽.",
+    "descripcion": "Chop de Boca Juniors de 500cc impreso en 3D, resistente y con gran presencia. Perfecto para disfrutar tus bebidas favoritas mientras llevás tu pasión por el club a otro nivel.",
     "imagenes": [
-      "img/chop-jarra/chop/boca/chop_boca.png",
-      "img/chop-jarra/chop/boca/chop_boca2.png",
-      "img/chop-jarra/chop/boca/chop_boca3.png"
+      "img/chop-jarra/chop/boca/chopBoca1.png",
+      "img/chop-jarra/chop/boca/chopBoca2.png"
     ]
   },
   {
@@ -34,7 +33,7 @@
     "categoria": "decoracion",
     "stock": 5,
     "destacado": true,
-    "descripcion": "Cartel de Iron Maiden en impresión 3D 🖨️ con luces LED 💡. Ideal para decorar tu espacio y darle un estilo rockero único 🎸.",
+    "descripcion": "Cartel de Iron Maiden con iluminación LED, impreso en 3D con gran nivel de detalle. Ideal para transformar tu espacio con un estilo rockero único y llamativo.",
     "imagenes": [
       "img/decoracion/ironMaiden/iron_maiden.png",
       "img/decoracion/ironMaiden/iron_maiden2.png",
@@ -48,7 +47,7 @@
     "categoria": "jarra",
     "stock": 12,
     "destacado": false,
-    "descripcion": "Jarra de Racing de 500cc realizada en impresión 3D 🖨️. Ideal para disfrutar tus bebidas 🍺 y demostrar tu pasión ⚽.",
+    "descripcion": "Jarra de Racing de 500cc impresa en 3D, práctica y resistente. Ideal para acompañar tus momentos con amigos mostrando tu pasión por el club.",
     "imagenes": [
       "img/chop-jarra/jarra/racing/racing_jarra.png",
       "img/chop-jarra/jarra/racing/racing_jarra2.png"
@@ -61,7 +60,7 @@
     "categoria": "jarra",
     "stock": 10,
     "destacado": false,
-    "descripcion": "Jarra de Boca Juniors de 500cc realizada en impresión 3D 🖨️. Ideal para disfrutar tus bebidas 🍺 y demostrar tu pasión ⚽.",
+    "descripcion": "Jarra de Boca Juniors de 500cc en impresión 3D. Diseño sólido y funcional, perfecta para disfrutar tus bebidas con identidad futbolera.",
     "imagenes": [
       "img/chop-jarra/jarra/boca/jarra_boca.png",
       "img/chop-jarra/jarra/boca/jarra_boca2.png"
@@ -74,11 +73,24 @@
     "categoria": "figura",
     "stock": 6,
     "destacado": true,
-    "descripcion": "Dummy articulado de Springtrap de 15 cm en impresión 3D 🖨️. Totalmente móvil, ideal para coleccionar, decorar o recrear poses 🎮.",
+    "descripcion": "Figura articulada de Springtrap de 15 cm impresa en 3D. Totalmente móvil, ideal para coleccionistas, decoración o recrear poses dinámicas.",
     "imagenes": [
-      "img/figura/dummy/springtrap/springtrap.png",
+      "img/figura/dummy/springtrap/springtrap1.png",
       "img/figura/dummy/springtrap/springtrap2.png",
       "img/figura/dummy/springtrap/springtrap3.png"
+    ]
+  },
+  {
+    "id": "dummy-springbonnie",
+    "nombre": "Dummy Springbonnie",
+    "precio": 18000,
+    "categoria": "figura",
+    "stock": 6,
+    "destacado": true,
+    "descripcion": "Dummy articulado de Springbonnie de 15 cm en impresión 3D. Diseño detallado y flexible, perfecto para fans y coleccionistas.",
+    "imagenes": [
+      "img/figura/dummy/springbonnie/springbonnie.png",
+      "img/figura/dummy/springbonnie/springbonnie2.png"
     ]
   },
   {
@@ -88,7 +100,7 @@
     "categoria": "decoracion",
     "stock": 7,
     "destacado": true,
-    "descripcion": "Cartel de One Piece ☠️🏴‍☠️ de 26 cm en impresión 3D 🖨️. Ideal para decorar tu habitación, setup o rincón otaku 🔥.",
+    "descripcion": "Cartel de One Piece impreso en 3D de 26 cm. Ideal para decorar tu habitación o setup con un estilo único inspirado en el mundo pirata.",
     "imagenes": [
       "img/decoracion/onePiece/cartel_onePiece.png",
       "img/decoracion/onePiece/cartel_onePiece2.png"
@@ -101,7 +113,7 @@
     "categoria": "figura",
     "stock": 9,
     "destacado": false,
-    "descripcion": "Dummy articulado de Invencible (Mark variante Mohawk) de 15 cm en impresión 3D 🖨️. Totalmente móvil, ideal para coleccionar, decorar o recrear poses.",
+    "descripcion": "Figura articulada de Mark (versión Mohawk) de 15 cm en impresión 3D. Totalmente móvil, ideal para coleccionar o exhibir con poses personalizadas.",
     "imagenes": [
       "img/figura/dummy/invencible/mohawk/mohawk_mark.png",
       "img/figura/dummy/invencible/mohawk/mohawk_mark2.png",
@@ -115,7 +127,7 @@
     "categoria": "cosplay",
     "stock": 3,
     "destacado": true,
-    "descripcion": "Linterna de Genshin de 22 cm en impresión 3D 🖨️. Perfecta para cosplay, sesiones de fotos o eventos. Liviana, detallada y lista para destacar ✨.",
+    "descripcion": "Linterna inspirada en Genshin Impact de 22 cm, impresa en 3D. Liviana, detallada y perfecta para cosplay, eventos o sesiones de fotos.",
     "imagenes": [
       "img/cosplay/genshin/genshin_linterna.png"
     ]
@@ -127,7 +139,7 @@
     "categoria": "figura",
     "stock": 8,
     "destacado": true,
-    "descripcion": "Ikran de Avatar de 30 cm en impresión 3D 🖨️. Modelo flexible, detallado y perfecto para fans de Pandora 🌌. Una pieza única para tu colección.",
+    "descripcion": "Ikran de Avatar de 30 cm con diseño flexible en impresión 3D. Detallado y resistente, ideal para fans y coleccionistas.",
     "imagenes": [
       "img/figura/flex/avatar/ikran_avatar.png",
       "img/figura/flex/avatar/ikran_avatar2.png"
@@ -140,7 +152,7 @@
     "categoria": "utiles",
     "stock": 20,
     "destacado": false,
-    "descripcion": "Llavero de Argentina 🇦🇷 en impresión 3D 🖨️ que también funciona como soporte para celular 📱. Compacto, práctico e ideal para usar en cualquier lugar.",
+    "descripcion": "Llavero de Argentina en impresión 3D que también funciona como soporte para celular. Compacto, práctico y perfecto para usar en cualquier lugar.",
     "imagenes": [
       "img/utiles/llavero/argentina/llavero_argentina.png",
       "img/utiles/llavero/argentina/llavero_argentina2.png"
@@ -153,9 +165,9 @@
     "categoria": "figura",
     "stock": 7,
     "destacado": false,
-    "descripcion": "Dummy articulado de Invencible (Mark) de 15 cm en impresión 3D 🖨️. Totalmente móvil, ideal para coleccionar, decorar o recrear poses.",
+    "descripcion": "Figura articulada de Mark de 15 cm en impresión 3D. Totalmente móvil, ideal para coleccionar o decorar con diferentes poses.",
     "imagenes": [
-      "img/figura/dummy/invencible/mark/mark.png",
+      "img/figura/dummy/invencible/mark/mark1.png",
       "img/figura/dummy/invencible/mark/mark2.png"
     ]
   },
@@ -166,7 +178,7 @@
     "categoria": "utiles",
     "stock": 15,
     "destacado": true,
-    "descripcion": "Llavero inspirado en Stranger Things impreso en 3D 🖨️. Diseño único, liviano y resistente, ideal para fans de la serie. Perfecto para llaves, mochilas o regalar 🎁.",
+    "descripcion": "Llavero inspirado en Stranger Things impreso en 3D. Liviano, resistente y perfecto para fans que quieren llevar la serie a todos lados.",
     "imagenes": [
       "img/utiles/llavero/stranger/strangerThings.png",
       "img/utiles/llavero/stranger/strangerThings2.png"
@@ -179,7 +191,7 @@
     "categoria": "figura",
     "stock": 6,
     "destacado": true,
-    "descripcion": "Dummy articulado de Iron Man de 22 cm en impresión 3D 🖨️. Diseño detallado inspirado en el universo Marvel. Totalmente móvil, ideal para coleccionar, decorar o recrear poses épicas.",
+    "descripcion": "Figura articulada de Iron Man de 22 cm en impresión 3D. Diseño detallado y totalmente móvil, ideal para coleccionistas y fans de Marvel.",
     "imagenes": [
       "img/figura/dummy/ironMan/ironMan.png",
       "img/figura/dummy/ironMan/ironMan2.png"
@@ -192,9 +204,59 @@
     "categoria": "decoracion",
     "stock": 11,
     "destacado": true,
-    "descripcion": "¡Llevate el mundo de One Piece a tu casa! ☠️🔥 Kit de imanes impresos en 3D 🖨️ con diseños únicos y súper detallados. Perfectos para decorar tu heladera, setup o cualquier rincón con espíritu pirata.",
+    "descripcion": "Kit de imanes de One Piece impresos en 3D con diseños únicos. Perfectos para decorar heladeras, escritorios o cualquier espacio con estilo pirata.",
     "imagenes": [
       "img/decoracion/onePiece/iman/imanOnePiece.png"
+    ]
+  },
+  {
+    "id": "figura-dummyArquero",
+    "nombre": "Dummy Arquero",
+    "precio": 12000,
+    "categoria": "figura",
+    "stock": 11,
+    "destacado": true,
+    "descripcion": "Figura articulada de arquero impresa en 3D. Totalmente móvil, ideal para coleccionar, decorar o crear escenas dinámicas.",
+    "imagenes": [
+      "img/figura/dummy/arquero/arquero1.png",
+      "img/figura/dummy/arquero/arquero2.png",
+      "img/figura/dummy/arquero/arquero3.png"
+    ]
+  },
+  {
+    "id": "didactico-tablaPitagorica",
+    "nombre": "Tabla Pitagorica",
+    "precio": 4200,
+    "categoria": "didactico",
+    "stock": 11,
+    "destacado": true,
+    "descripcion": "Tabla pitagórica en impresión 3D diseñada para facilitar el aprendizaje de las tablas de multiplicar de forma visual e interactiva. Ideal para niños en etapa escolar.",
+    "imagenes": [
+      "img/didactico/matematica/tablaPitagorica.png"
+    ]
+  },
+  {
+    "id": "didactico-casaSumaResta",
+    "nombre": "Casa Suma y Resta",
+    "precio": 1500,
+    "categoria": "didactico",
+    "stock": 11,
+    "destacado": true,
+    "descripcion": "Material didáctico en impresión 3D para aprender suma y resta de manera práctica y divertida. Ideal para nivel inicial y primeros años.",
+    "imagenes": [
+      "img/didactico/matematica/casaSumaResta.png"
+    ]
+  },
+  {
+    "id": "didactico-guiaLectura",
+    "nombre": "Guia Lectura",
+    "precio": 1200,
+    "categoria": "didactico",
+    "stock": 11,
+    "destacado": true,
+    "descripcion": "Guía de lectura en impresión 3D que ayuda a mejorar la concentración y el seguimiento de textos. Ideal para acompañar el aprendizaje en niños.",
+    "imagenes": [
+      "img/didactico/lectura/guiaLectura.png"
     ]
   }
 ]
