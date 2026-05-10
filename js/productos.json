@@ -8,9 +8,9 @@
     "destacado": true,
     "descripcion": "Material didáctico en impresión 3D diseñado para enseñar el ciclo de vida de la mariposa de forma visual y práctica. Ideal para nivel inicial, permite a los niños aprender jugando y explorando cada etapa de manera clara y atractiva.",
     "imagenes": [
-      "img/didactico/mariposa/mariposa_ciclo.png",
-      "img/didactico/mariposa/mariposa_ciclo2.png",
-      "img/didactico/mariposa/mariposa_ciclo3.png"
+      "img/didactico/mariposa/mariposa1.png",
+      "img/didactico/mariposa/mariposa2.png",
+      "img/didactico/mariposa/mariposa3.png"
     ]
   },
   {
@@ -257,6 +257,20 @@
     "descripcion": "Guía de lectura en impresión 3D que ayuda a mejorar la concentración y el seguimiento de textos. Ideal para acompañar el aprendizaje en niños.",
     "imagenes": [
       "img/didactico/lectura/guiaLectura.png"
+    ]
+  },
+    {
+    "id": "mundial-cajaFigurita",
+    "nombre": "Combo Caja Figuritas + 2 Sobres",
+    "precio": 12000,
+    "categoria": "promos",
+    "stock": 11,
+    "destacado": true,
+    "descripcion": "Combo Mundial ideal para guardar y proteger tus figuritas y sobres del Mundial. Incluye 1 caja compacta con divisiones internas y 2 sobres oficiales. Fabricado en impresión 3D con material resistente y cierre seguro, perfecto para mantener tu colección organizada, protegida y lista para llevar a cualquier lado.",
+    "imagenes": [
+      "img/mundial/cajaFigus/cajaFiguritas.png",
+       "img/mundial/cajaFigus/cajaFiguritas2.png",
+        "img/mundial/cajaFigus/cajaFiguritas3.png"
     ]
   }
 ]
