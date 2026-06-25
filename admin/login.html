@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Admin</title>
+
+    <style>
+        body{
+            background:#0f0f18;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            font-family:Arial;
+            color:white;
+        }
+
+        .login{
+            background:#1b1b2b;
+            padding:30px;
+            border-radius:15px;
+            width:300px;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin-top:10px;
+            margin-bottom:15px;
+        }
+
+        button{
+            width:100%;
+            padding:10px;
+            cursor:pointer;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="login">
+
+    <h2>Login Admin</h2>
+    <p id="error" style="color:red; display:none;">
+    Usuario o contraseña incorrectos
+</p>
+
+    <form method="POST" action="/login">
+
+        <input
+            type="text"
+            name="usuario"
+            placeholder="Usuario"
+            required
+        >
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Contraseña"
+            required
+        >
+
+        <button type="submit">
+            Ingresar
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+<script>
+const params = new URLSearchParams(window.location.search);
+
+if(params.get("error")){
+    document.getElementById("error").style.display = "block";
+}
+</script>
+</html>

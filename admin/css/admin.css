@@ -1,0 +1,396 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Outfit',sans-serif;
+    background:#0a0a0f;
+    color:#fff;
+}
+
+.dashboard{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ======================
+   SIDEBAR
+====================== */
+
+.sidebar{
+    width:280px;
+    background:#14141f;
+    padding:30px 20px;
+}
+
+.logo{
+    margin-bottom:40px;
+}
+
+.logo h2{
+    color:#8b5cf6;
+    font-size:2rem;
+}
+
+.sidebar nav{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.sidebar a{
+    text-decoration:none;
+    color:#fff;
+    padding:14px 16px;
+    border-radius:12px;
+    transition:.25s;
+    font-weight:500;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    background:#8b5cf6;
+}
+
+/* ======================
+   MAIN
+====================== */
+
+.main-content{
+    flex:1;
+    padding:35px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.topbar h1{
+    font-size:3rem;
+}
+
+/* ======================
+   CARDS
+====================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.card{
+    background:#14141f;
+    padding:25px;
+    border-radius:18px;
+}
+
+.card h3{
+    color:#bdbdc7;
+    margin-bottom:10px;
+}
+
+.card span{
+    font-size:2rem;
+    font-weight:bold;
+}
+
+/* ======================
+   PANEL
+====================== */
+
+.panel{
+    margin-top:30px;
+    background:#14141f;
+    padding:25px;
+    border-radius:18px;
+}
+
+/* ======================
+   TABLA
+====================== */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    text-align:left;
+    padding:16px;
+    color:#bdbdc7;
+}
+
+td{
+    padding:16px;
+    border-top:1px solid #252535;
+}
+
+.product-img{
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:12px;
+}
+
+/* ======================
+   BOTONES
+====================== */
+
+.btn-add{
+    background:#8b5cf6;
+    color:#fff;
+    border:none;
+    padding:14px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-add:hover{
+    background:#7c3aed;
+}
+
+.btn-edit{
+    background:#f59e0b;
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-right:6px;
+}
+
+.btn-delete{
+    background:#ef4444;
+    border:none;
+    padding:10px 14px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* ======================
+   MODAL
+====================== */
+
+.hidden{
+    display:none!important;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.85);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    backdrop-filter:blur(6px);
+
+    z-index:9999;
+}
+
+.modal-content{
+
+    width:700px;
+    max-width:95%;
+    max-height:90vh;
+
+    overflow-y:auto;
+
+    background:#14141f;
+
+    border-radius:20px;
+
+    border:1px solid #26263a;
+
+    padding:30px;
+
+    box-shadow:0 0 30px rgba(139,92,246,.25);
+}
+
+.modal-content h2{
+
+    margin-bottom:25px;
+    font-size:2rem;
+
+}
+
+/* ======================
+   GRID FORMULARIO
+====================== */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+.full{
+
+    grid-column:1 / -1;
+
+}
+
+.modal-content label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#bdbdc7;
+
+    font-weight:500;
+
+}
+
+.modal-content input,
+.modal-content textarea,
+.modal-content select{
+
+    width:100%;
+
+    padding:14px;
+
+    background:#0f0f17;
+
+    border:1px solid #2b2b40;
+
+    color:white;
+
+    border-radius:12px;
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+.modal-content textarea{
+
+    height:130px;
+    resize:none;
+
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus,
+.modal-content select:focus{
+
+    outline:none;
+
+    border-color:#8b5cf6;
+
+    box-shadow:0 0 0 3px rgba(139,92,246,.25);
+
+}
+
+/* ======================
+   IMAGEN
+====================== */
+
+.preview-imagen{
+
+    width:180px;
+    height:180px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+    border:2px solid #8b5cf6;
+
+    display:block;
+
+    margin:20px auto;
+
+}
+
+/* ======================
+   BOTONES
+====================== */
+
+.modal-buttons{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    margin-top:25px;
+
+}
+
+.modal-buttons button{
+
+    padding:14px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.2s;
+
+}
+
+#btnCancelar,
+#btnCancelarAgregar{
+
+    background:#2b2b40;
+
+    color:white;
+
+}
+
+#btnCancelar:hover,
+#btnCancelarAgregar:hover{
+
+    background:#3b3b57;
+
+}
+
+#btnGuardar,
+#btnAgregar{
+
+    background:#8b5cf6;
+
+    color:white;
+
+}
+
+#btnGuardar:hover,
+#btnAgregar:hover{
+
+    background:#7c3aed;
+
+}
+
+/* ======================
+   RESPONSIVE
+====================== */
+
+@media(max-width:700px){
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

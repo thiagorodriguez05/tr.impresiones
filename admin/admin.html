@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Panel Administrador</title>
+
+    <link
+        rel="stylesheet"
+        href="/admin/css/admin.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ===========================
+        MODAL EDITAR
+============================ -->
+
+<div
+    id="modalEditar"
+    class="modal hidden">
+
+    <div class="modal-content">
+
+        <input
+            type="hidden"
+            id="edit-id">
+
+        <h2>Editar Producto</h2>
+
+        <h3
+            id="nombre-producto-modal"
+            class="titulo-producto">
+        </h3>
+
+        <img
+            id="preview-imagen"
+            class="preview-imagen"
+            src=""
+            alt="Vista previa">
+
+        <label>Precio</label>
+
+        <input
+            type="number"
+            id="edit-precio"
+            required>
+
+        <label>Stock</label>
+
+        <input
+            type="number"
+            id="edit-stock"
+            required>
+
+        <label>Descripción</label>
+
+        <textarea
+            id="edit-descripcion">
+        </textarea>
+
+        <div class="modal-buttons">
+
+            <button id="btnCancelar">
+                Cancelar
+            </button>
+
+            <button id="btnGuardar">
+                Guardar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+        MODAL AGREGAR
+============================ -->
+
+<div
+    id="modalAgregar"
+    class="modal hidden">
+
+    <div class="modal-content">
+
+        <h2>Agregar Producto</h2>
+
+        <label>Nombre</label>
+
+        <input
+            type="text"
+            id="add-nombre"
+            autocomplete="off">
+
+        <label>Precio</label>
+
+        <input
+            type="number"
+            id="add-precio"
+            required>
+
+        <label>Stock</label>
+
+        <input
+            type="number"
+            id="add-stock"
+            required>
+
+        <label>Categoría</label>
+
+        <select id="add-categoria">
+
+        </select>
+
+        <label>Imagen</label>
+
+        <input
+            type="file"
+            id="add-imagen"
+            accept=".png,.jpg,.jpeg,.webp"
+            required>
+
+        <img
+            id="previewAgregar"
+            class="preview-imagen"
+            src=""
+            loading="lazy"
+            style="display:none"
+            alt="Vista previa">
+
+        <label>Descripción</label>
+
+        <textarea
+            id="add-descripcion">
+        </textarea>
+
+        <div class="modal-buttons">
+
+            <button
+                id="btnCancelarAgregar"
+                type="button">
+                Cancelar
+            </button>
+
+            <button
+                id="btnAgregar"
+                type="button">
+                Agregar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="dashboard">
+
+    <!-- =========================
+            SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>TR Impresiones</h2>
+        </div>
+
+        <nav>
+
+            <a
+                href="#"
+                class="active"
+                data-section="dashboard">
+
+                📊 Dashboard
+
+            </a>
+
+            <a
+                href="#"
+                data-section="productos">
+
+                📦 Productos
+
+            </a>
+
+            <a
+                href="#"
+                data-section="pedidos">
+
+                🛒 Pedidos
+
+            </a>
+
+            <a
+                href="#"
+                data-section="clientes">
+
+                👥 Clientes
+
+            </a>
+
+            <a
+                href="#"
+                data-section="configuracion">
+
+                ⚙️ Configuración
+
+            </a>
+
+            <a href="/logout">
+
+                🚪 Cerrar sesión
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- =========================
+            CONTENIDO
+    ========================== -->
+
+    <main class="main-content">
+
+        <!-- =========================
+                DASHBOARD
+        ========================== -->
+
+        <section
+            id="dashboard-section"
+            class="content-section">
+
+            <div class="topbar">
+
+                <h1>Dashboard</h1>
+
+            </div>
+
+            <section class="cards">
+
+                <div class="card">
+
+                    <h3>Ventas</h3>
+
+                    <span id="card-ventas">
+
+                        $0
+
+                    </span>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Pedidos</h3>
+
+                    <span id="card-pedidos">
+
+                        0
+
+                    </span>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Clientes</h3>
+
+                    <span id="card-clientes">
+
+                        0
+
+                    </span>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Productos</h3>
+
+                    <span id="total-productos">
+
+                        0
+
+                    </span>
+
+                </div>
+
+            </section>
+
+            <section class="panel">
+
+                <h2>Actividad reciente</h2>
+
+                <p>
+
+                    Bienvenido al panel de administración
+                    de <strong>TR Impresiones</strong>.
+
+                </p>
+
+            </section>
+
+        </section>
+
+        <!-- =========================
+                PRODUCTOS
+        ========================== -->
+
+        <section
+            id="productos-section"
+            class="content-section hidden">
+
+            <div class="topbar">
+
+                <h1>Productos</h1>
+
+                <button
+                    class="btn-add"
+                    id="btnAbrirAgregar">
+
+                    ➕ Agregar Producto
+
+                </button>
+
+            </div>
+
+            <section class="panel">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Estado</th>
+                            <th>Categoría</th>
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tabla-productos">
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+        </section>
+<!-- =========================
+        PEDIDOS
+========================= -->
+
+<section
+    id="pedidos-section"
+    class="content-section hidden">
+
+    <div class="topbar">
+
+        <h1>Pedidos</h1>
+
+    </div>
+
+    <section class="panel">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tabla-pedidos">
+
+                <tr>
+
+                    <td colspan="6">
+
+                        Todavía no hay pedidos.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</section>
+
+<!-- =========================
+        CLIENTES
+========================= -->
+
+<section
+    id="clientes-section"
+    class="content-section hidden">
+
+    <div class="topbar">
+
+        <h1>Clientes</h1>
+
+    </div>
+
+    <section class="panel">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="tabla-clientes">
+
+                <tr>
+
+                    <td colspan="5">
+
+                        Todavía no hay clientes.
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</section>
+
+<!-- =========================
+        CONFIGURACIÓN
+========================= -->
+
+<section
+    id="configuracion-section"
+    class="content-section hidden">
+
+    <div class="topbar">
+
+        <h1>Configuración</h1>
+
+    </div>
+
+    <section class="panel">
+
+        <h2>Sistema</h2>
+
+        <br>
+
+        <p>
+
+            Panel desarrollado para
+            <strong>TR Impresiones</strong>.
+
+        </p>
+
+        <br>
+
+        <p>
+
+            Base de datos:
+            <strong>SQL Server</strong>
+
+        </p>
+
+        <br>
+
+        <p>
+
+            Estado:
+
+            <span
+                style="
+                    color:#22c55e;
+                    font-weight:bold;
+                ">
+
+                ● Conectado
+
+            </span>
+
+        </p>
+
+    </section>
+
+</section>
+
+    </main>
+
+</div>
+
+<!-- =========================
+        LOADER
+========================= -->
+
+<div
+    id="loader"
+    class="hidden">
+
+    <div class="spinner"></div>
+
+</div>
+
+<!-- =========================
+        TOAST
+========================= -->
+
+<div
+    id="toast"
+    class="toast hidden">
+
+    <span id="toast-text"></span>
+
+</div>
+
+<!-- =========================
+        SCRIPTS
+========================= -->
+
+<script src="/admin/js/admin.js"></script>
+
+</body>
+
+</html>

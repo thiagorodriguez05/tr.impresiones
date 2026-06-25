@@ -536,6 +536,20 @@ footer {
   cursor: pointer;
 }
 
+
+.menu-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+    z-index: 190;
+
+    display: none;
+}
+
+.menu-overlay.open{
+    display: block;
+}
+
 /* ===== MENÚ LATERAL ===== */
 .side-menu {
   position: fixed;
