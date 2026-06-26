@@ -30,9 +30,7 @@ products = data.map(p => ({
 
     desc: p.descripcion || "",
 
-    images: p.imagen
-        ? ["/" + p.imagen]
-        : [],
+    images: (p.imagenes || []).map(img => "/" + img),
 
     icon: "🧱"
 
@@ -339,18 +337,6 @@ function showToast(msg) {
 
   setTimeout(() => t.classList.remove('show'), 2500);
 }
-// ============================================================
-// MENÚ HAMBURGUESA (ARREGLADO)
-// ============================================================
-function toggleMenu() {
-
-    const menu = document.getElementById("sideMenu");
-    const overlay = document.getElementById("menuOverlay");
-
-    menu.classList.toggle("open");
-    overlay.classList.toggle("open");
-
-}
 
 // cerrar al hacer click fuera (extra seguridad)
 document.getElementById("menuOverlay").addEventListener("click", () => {
@@ -381,3 +367,29 @@ function cerrarMenu(){
         .classList.remove("open");
 
 }
+
+async function cargarMenuCategorias() {
+
+    const res = await fetch("/api/categorias");
+    const categorias = await res.json();
+
+    const contenedor = document.getElementById("listaCategorias");
+
+    contenedor.innerHTML = "";
+
+    categorias.forEach(categoria => {
+
+        contenedor.innerHTML += `
+            <button onclick="filter('${categoria.slug}'); cerrarMenu()">
+                ${categoria.nombre}
+            </button>
+        `;
+
+    });
+
+}
+document.addEventListener("DOMContentLoaded", () => {
+
+    cargarMenuCategorias();
+
+});

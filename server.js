@@ -88,23 +88,19 @@ const upload = multer({
 // ======================
 // SUBIR IMAGEN
 // ======================
-
 app.post(
     "/api/upload",
-    upload.single("imagen"),
+    upload.array("imagenes", 10),
     (req, res) => {
 
-        res.json({
+        const rutas = req.files.map(file => ({
+            ruta: "uploads/" + file.filename
+        }));
 
-            ruta:
-                "uploads/" +
-                req.file.filename
-
-        });
+        res.json(rutas);
 
     }
 );
-
 // ======================
 // LOGIN
 // ======================

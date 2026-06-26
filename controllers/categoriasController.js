@@ -17,6 +17,8 @@ async function listarCategorias(req, res) {
                 FROM categorias
                 ORDER BY nombre
             `);
+        
+            console.log(resultado.recordset);
 
         res.json(resultado.recordset);
 

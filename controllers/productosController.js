@@ -8,25 +8,60 @@ async function listarProductos(req, res) {
 
     try {
 
-        console.log("ENTRO AL CONTROLLER SQL");
-
         const conexion = await getConnection();
 
-        const resultado = await conexion
+        // Obtener todos los productos
+        const productos = await conexion
             .request()
-            .query("SELECT * FROM productos");
+            .query(`
+                SELECT *
+                FROM productos
+                ORDER BY id DESC
+            `);
 
-        console.log(resultado.recordset);
+        // Obtener todas las imágenes
+        const imagenes = await conexion
+            .request()
+            .query(`
+                SELECT *
+                FROM imagenes_producto
+            `);
 
-        const productos = resultado.recordset.map(p => ({
-            ...p,
-            imagenes: [p.imagen]
-        }));
+        // Asociar imágenes a cada producto
+        const resultado = productos.recordset.map(producto => {
 
-        res.json(productos);
+            console.log("Producto:", producto.id, typeof producto.id);
 
-    } catch (error) {
+            imagenes.recordset.forEach(img => {
+                console.log("Imagen:", img.producto_id, typeof img.producto_id);
+            });
+            const fotos = imagenes.recordset
+            .filter(img => img.producto_id == producto.id)
+            .map(img => img.imagen);
+
+            return {
+
+                ...producto,
+
+                imagenes: fotos
+
+            };
+
+        });
+
+        res.json(resultado);
+
+    }
+    catch (error) {
+
         console.error(error);
+
+        res.status(500).json({
+
+            error: error.message
+
+        });
+
     }
 
 }
@@ -64,11 +99,26 @@ async function obtenerProducto(req, res) {
 
         const producto = resultado.recordset[0];
 
-            producto.imagenes = [producto.imagen];
+        const imagenes = await conexion
+            .request()
+            .input(
+                "id",
+                sql.Int,
+                producto.id
+            )
+            .query(`
+                SELECT imagen
+                FROM imagenes_producto
+                WHERE producto_id=@id
+            `);
 
-            res.json(producto);
+        producto.imagenes =
+            imagenes.recordset.map(i => i.imagen);
 
-    } catch (error) {
+        res.json(producto);
+
+    }
+    catch (error) {
 
         console.error(error);
 
@@ -79,7 +129,6 @@ async function obtenerProducto(req, res) {
     }
 
 }
-
 // ======================
 // AGREGAR PRODUCTO
 // ======================
@@ -90,14 +139,16 @@ async function agregarProducto(req, res) {
 
         const conexion = await getConnection();
 
-        await conexion
+        const imagenPrincipal =
+            req.body.imagenes.length > 0
+                ? req.body.imagenes[0].ruta
+                : null;
+
+        // Crear producto y obtener el ID generado
+        const resultado = await conexion
             .request()
 
-            .input(
-                "nombre",
-                sql.VarChar,
-                req.body.nombre
-            )
+            .input("nombre", sql.VarChar, req.body.nombre)
 
             .input(
                 "descripcion",
@@ -107,7 +158,7 @@ async function agregarProducto(req, res) {
 
             .input(
                 "precio",
-                sql.Decimal(10,2),
+                sql.Decimal(10, 2),
                 req.body.precio
             )
 
@@ -115,12 +166,6 @@ async function agregarProducto(req, res) {
                 "categoria",
                 sql.VarChar,
                 req.body.categoria
-            )
-
-            .input(
-                "imagen",
-                sql.VarChar,
-                req.body.imagen
             )
 
             .input(
@@ -136,9 +181,10 @@ async function agregarProducto(req, res) {
                     descripcion,
                     precio,
                     categoria,
-                    imagen,
                     stock
                 )
+
+                OUTPUT INSERTED.id
 
                 VALUES
                 (
@@ -146,21 +192,62 @@ async function agregarProducto(req, res) {
                     @descripcion,
                     @precio,
                     @categoria,
-                    @imagen,
                     @stock
                 )
             `);
 
+        const productoId =
+            resultado.recordset[0].id;
+
+        // Guardar todas las imágenes
+        for (const img of req.body.imagenes) {
+
+            await conexion
+                .request()
+
+                .input(
+                    "producto_id",
+                    sql.Int,
+                    productoId
+                )
+
+                .input(
+                    "imagen",
+                    sql.VarChar,
+                    img.ruta
+                )
+
+                .query(`
+                    INSERT INTO imagenes_producto
+                    (
+                        producto_id,
+                        imagen
+                    )
+
+                    VALUES
+                    (
+                        @producto_id,
+                        @imagen
+                    )
+                `);
+
+        }
+
         res.json({
-            mensaje: "Producto agregado"
+
+            mensaje: "Producto agregado correctamente"
+
         });
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.error(error);
 
         res.status(500).json({
+
             error: error.message
+
         });
 
     }
@@ -177,6 +264,7 @@ async function editarProducto(req, res) {
 
         const conexion = await getConnection();
 
+        // Actualizar datos del producto
         await conexion
             .request()
 
@@ -187,15 +275,9 @@ async function editarProducto(req, res) {
             )
 
             .input(
-                "precio",
-                sql.Decimal(10,2),
-                req.body.precio
-            )
-
-            .input(
-                "stock",
-                sql.Int,
-                req.body.stock
+                "nombre",
+                sql.VarChar,
+                req.body.nombre
             )
 
             .input(
@@ -204,28 +286,103 @@ async function editarProducto(req, res) {
                 req.body.descripcion
             )
 
+            .input(
+                "precio",
+                sql.Decimal(10, 2),
+                req.body.precio
+            )
+
+            .input(
+                "categoria",
+                sql.VarChar,
+                req.body.categoria
+            )
+
+            .input(
+                "stock",
+                sql.Int,
+                req.body.stock
+            )
+
             .query(`
                 UPDATE productos
-
                 SET
-
-                precio=@precio,
-                stock=@stock,
-                descripcion=@descripcion
-
+                    nombre=@nombre,
+                    descripcion=@descripcion,
+                    precio=@precio,
+                    categoria=@categoria,
+                    stock=@stock
                 WHERE id=@id
             `);
 
+        // Si llegaron imágenes nuevas
+        if (req.body.imagenes && req.body.imagenes.length > 0) {
+
+            // Borra las imágenes anteriores
+            await conexion
+                .request()
+
+                .input(
+                    "id",
+                    sql.Int,
+                    req.params.id
+                )
+
+                .query(`
+                    DELETE FROM imagenes_producto
+                    WHERE producto_id=@id
+                `);
+
+            // Guarda las nuevas
+            for (const img of req.body.imagenes) {
+
+                await conexion
+                    .request()
+
+                    .input(
+                        "producto_id",
+                        sql.Int,
+                        req.params.id
+                    )
+
+                    .input(
+                        "imagen",
+                        sql.VarChar,
+                        img.ruta
+                    )
+
+                    .query(`
+                        INSERT INTO imagenes_producto
+                        (
+                            producto_id,
+                            imagen
+                        )
+                        VALUES
+                        (
+                            @producto_id,
+                            @imagen
+                        )
+                    `);
+
+            }
+
+        }
+
         res.json({
+
             mensaje: "Producto actualizado"
+
         });
 
-    } catch (error) {
+    }
+    catch (error) {
 
         console.error(error);
 
         res.status(500).json({
+
             error: error.message
+
         });
 
     }
