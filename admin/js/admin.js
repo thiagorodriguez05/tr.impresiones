@@ -111,10 +111,13 @@ async function cargarProductos() {
         const productos = await respuesta.json();
 
         console.log(productos);
-        console.log(productos[0]);
-        console.log(productos[0].imagenes);
-        console.log(JSON.stringify(productos, null, 2));
 
+        if (productos.length > 0) {
+            console.log(productos[0]);
+            console.log(productos[0].imagenes);
+        }
+
+        console.log(JSON.stringify(productos, null, 2));
         const tabla =
         document.getElementById(
             "tabla-productos"
@@ -265,6 +268,16 @@ function activarBotonesEditar() {
                         "edit-descripcion"
                     ).value =
                     producto.descripcion || "";
+                    
+                    document.getElementById(
+                        "edit-nombre"
+                    ).value =
+                    producto.nombre;
+
+                    document.getElementById(
+                        "edit-categoria"
+                    ).value =
+                    producto.categoria;
 
                     // Imagen
                     const preview =
@@ -315,42 +328,57 @@ function activarBotonesEditar() {
 function activarBotonesEliminar() {
 
     document
-    .querySelectorAll(".btn-delete")
-    .forEach(btn => {
+        .querySelectorAll(".btn-delete")
+        .forEach(btn => {
 
-        btn.addEventListener(
-            "click",
-            async () => {
+            btn.onclick = async () => {
 
-                const id =
-                btn.dataset.id;
+                const id = btn.dataset.id;
 
-                const confirmar =
-                confirm(
-                    "¿Eliminar producto?"
-                );
+                if (!confirm("¿Eliminar producto?")) {
+                    return;
+                }
 
-                if (!confirmar) return;
+                try {
 
-                mostrarLoader();
-                await fetch(
-                    `/api/productos/${id}`,
-                    {
-                        method: "DELETE"
+                    mostrarLoader();
+
+                    const respuesta = await fetch(
+                        `/api/productos/${id}`,
+                        {
+                            method: "DELETE"
+                        }
+                    );
+
+                    const data = await respuesta.json();
+
+                    console.log("Respuesta DELETE:", data);
+
+                    if (!respuesta.ok) {
+                        throw new Error(data.error || "Error eliminando");
                     }
-                );
-                ocultarLoader();
 
-                cargarProductos();
+                    await cargarProductos();
 
-            }
-        );
+                    mostrarToast("Producto eliminado");
 
-    });
+                } catch (error) {
+
+                    console.error("Error eliminando:", error);
+
+                    mostrarToast("No se pudo eliminar");
+
+                } finally {
+
+                    ocultarLoader();
+
+                }
+
+            };
+
+        });
 
 }
-
-
 // ====================================
 // GUARDAR PRODUCTO
 // ====================================
@@ -376,24 +404,24 @@ async function guardarProducto() {
 
                 body: JSON.stringify({
 
-                    precio: Number(
-                        document.getElementById(
-                            "edit-precio"
-                        ).value
-                    ),
+                nombre:
+                    document.getElementById("edit-nombre").value,
 
-                    stock: Number(
-                        document.getElementById(
-                            "edit-stock"
-                        ).value
-                    ),
+                descripcion:
+                    document.getElementById("edit-descripcion").value,
 
-                    descripcion:
-                    document.getElementById(
-                        "edit-descripcion"
-                    ).value
+                precio:
+                    Number(document.getElementById("edit-precio").value),
 
-                })
+                categoria:
+                    document.getElementById("edit-categoria").value,
+
+                stock:
+                    Number(document.getElementById("edit-stock").value),
+
+                imagenes: []
+
+            })
                 
 
             }
@@ -557,45 +585,68 @@ async function agregarProducto() {
 // CARGAR CATEGORÍAS
 // ====================================
 
-async function cargarCategorias(){
-     console.log("cargarCategorias ejecutada");
-    try{
+async function cargarCategorias() {
+
+    console.log("cargarCategorias ejecutada");
+
+    try {
 
         mostrarLoader();
-        const respuesta = await fetch("/api/categorias");
-        console.log(respuesta.status);
-        const categorias = await respuesta.json();
-        console.log(categorias);
-        const select = document.getElementById("add-categoria");
 
-        select.innerHTML = "";
+        const respuesta = await fetch("/api/categorias");
+
+        console.log(respuesta.status);
+
+        const categorias = await respuesta.json();
+
+        console.log(categorias);
+
+        const selectAgregar =
+            document.getElementById("add-categoria");
+
+        const selectEditar =
+            document.getElementById("edit-categoria");
+
+        selectAgregar.innerHTML = "";
+        selectEditar.innerHTML = "";
 
         categorias.forEach(categoria => {
 
-            const option = document.createElement("option");
+            // Modal Agregar
+            const optionAgregar = document.createElement("option");
 
-            option.value = categoria.nombre;
-            option.textContent = categoria.nombre;
+            optionAgregar.value = categoria.nombre;
+            optionAgregar.textContent = categoria.nombre;
 
-            select.appendChild(option);
+            selectAgregar.appendChild(optionAgregar);
+
+            // Modal Editar
+            const optionEditar = document.createElement("option");
+
+            optionEditar.value = categoria.nombre;
+            optionEditar.textContent = categoria.nombre;
+
+            selectEditar.appendChild(optionEditar);
 
         });
 
-
     }
-    catch(error){
-        
+    catch (error) {
+
         console.error(
             "Error cargando categorías:",
             error
         );
-        
+
     }
-    finally{
+    finally {
+
         ocultarLoader();
+
     }
 
 }
+
 function mostrarLoader() {
 
     const loader = document.getElementById("loader");

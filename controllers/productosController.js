@@ -1,4 +1,5 @@
-const { sql, getConnection } = require("../config/db");
+const pool = require("../config/db");
+console.log("USANDO PRODUCTOS CONTROLLER NUEVO");
 
 // ======================
 // LISTAR PRODUCTOS
@@ -8,61 +9,46 @@ async function listarProductos(req, res) {
 
     try {
 
-        const conexion = await getConnection();
+        const productos = await pool.query(`
+            SELECT *
+            FROM productos
+            ORDER BY id DESC
+        `);
 
-        // Obtener todos los productos
-        const productos = await conexion
-            .request()
-            .query(`
-                SELECT *
-                FROM productos
-                ORDER BY id DESC
-            `);
+        const imagenes = await pool.query(`
+            SELECT *
+            FROM imagenes_producto
+        `);
 
-        // Obtener todas las imágenes
-        const imagenes = await conexion
-            .request()
-            .query(`
-                SELECT *
-                FROM imagenes_producto
-            `);
+        console.log(productos.rows);
+        console.log(imagenes.rows);
 
-        // Asociar imágenes a cada producto
-        const resultado = productos.recordset.map(producto => {
+        const resultado = productos.rows.map(producto => {
 
-            console.log("Producto:", producto.id, typeof producto.id);
-
-            imagenes.recordset.forEach(img => {
-                console.log("Imagen:", img.producto_id, typeof img.producto_id);
-            });
-            const fotos = imagenes.recordset
-            .filter(img => img.producto_id == producto.id)
-            .map(img => img.imagen);
+            const fotos = imagenes.rows
+                .filter(img => img.producto_id == producto.id)
+                .map(img => img.imagen);
 
             return {
-
                 ...producto,
-
                 imagenes: fotos
-
             };
 
         });
 
         res.json(resultado);
 
-    }
-    catch (error) {
+    } catch (error) {
 
-        console.error(error);
+    console.error("==============");
+    console.dir(error, { depth: null });
+    console.error("==============");
 
-        res.status(500).json({
+    res.status(500).json({
+        error: error.message
+    });
 
-            error: error.message
-
-        });
-
-    }
+}
 
 }
 
@@ -74,22 +60,16 @@ async function obtenerProducto(req, res) {
 
     try {
 
-        const conexion = await getConnection();
+        const resultado = await pool.query(
+            `
+            SELECT *
+            FROM productos
+            WHERE id = $1
+            `,
+            [req.params.id]
+        );
 
-        const resultado = await conexion
-            .request()
-            .input(
-                "id",
-                sql.Int,
-                req.params.id
-            )
-            .query(`
-                SELECT *
-                FROM productos
-                WHERE id=@id
-            `);
-
-        if (resultado.recordset.length === 0) {
+        if (resultado.rows.length === 0) {
 
             return res.status(404).json({
                 mensaje: "Producto no encontrado"
@@ -97,28 +77,22 @@ async function obtenerProducto(req, res) {
 
         }
 
-        const producto = resultado.recordset[0];
+        const producto = resultado.rows[0];
 
-        const imagenes = await conexion
-            .request()
-            .input(
-                "id",
-                sql.Int,
-                producto.id
-            )
-            .query(`
-                SELECT imagen
-                FROM imagenes_producto
-                WHERE producto_id=@id
-            `);
+        const imagenes = await pool.query(
+            `
+            SELECT imagen
+            FROM imagenes_producto
+            WHERE producto_id = $1
+            `,
+            [producto.id]
+        );
 
-        producto.imagenes =
-            imagenes.recordset.map(i => i.imagen);
+        producto.imagenes = imagenes.rows.map(i => i.imagen);
 
         res.json(producto);
 
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(error);
 
@@ -129,6 +103,7 @@ async function obtenerProducto(req, res) {
     }
 
 }
+
 // ======================
 // AGREGAR PRODUCTO
 // ======================
@@ -137,117 +112,78 @@ async function agregarProducto(req, res) {
 
     try {
 
-        const conexion = await getConnection();
+        const {
+            nombre,
+            descripcion,
+            precio,
+            categoria,
+            stock,
+            imagenes
+        } = req.body;
 
-        const imagenPrincipal =
-            req.body.imagenes.length > 0
-                ? req.body.imagenes[0].ruta
-                : null;
-
-        // Crear producto y obtener el ID generado
-        const resultado = await conexion
-            .request()
-
-            .input("nombre", sql.VarChar, req.body.nombre)
-
-            .input(
-                "descripcion",
-                sql.NVarChar(sql.MAX),
-                req.body.descripcion
+        const resultado = await pool.query(
+            `
+            INSERT INTO productos
+            (
+                nombre,
+                descripcion,
+                precio,
+                categoria,
+                stock
             )
-
-            .input(
-                "precio",
-                sql.Decimal(10, 2),
-                req.body.precio
+            VALUES
+            (
+                $1,$2,$3,$4,$5
             )
+            RETURNING id
+            `,
+            [
+                nombre,
+                descripcion,
+                precio,
+                categoria,
+                stock
+            ]
+        );
 
-            .input(
-                "categoria",
-                sql.VarChar,
-                req.body.categoria
-            )
+        const productoId = resultado.rows[0].id;
 
-            .input(
-                "stock",
-                sql.Int,
-                req.body.stock
-            )
+        if (imagenes && imagenes.length > 0) {
 
-            .query(`
-                INSERT INTO productos
-                (
-                    nombre,
-                    descripcion,
-                    precio,
-                    categoria,
-                    stock
-                )
+            for (const img of imagenes) {
 
-                OUTPUT INSERTED.id
-
-                VALUES
-                (
-                    @nombre,
-                    @descripcion,
-                    @precio,
-                    @categoria,
-                    @stock
-                )
-            `);
-
-        const productoId =
-            resultado.recordset[0].id;
-
-        // Guardar todas las imágenes
-        for (const img of req.body.imagenes) {
-
-            await conexion
-                .request()
-
-                .input(
-                    "producto_id",
-                    sql.Int,
-                    productoId
-                )
-
-                .input(
-                    "imagen",
-                    sql.VarChar,
-                    img.ruta
-                )
-
-                .query(`
+                await pool.query(
+                    `
                     INSERT INTO imagenes_producto
                     (
                         producto_id,
                         imagen
                     )
-
                     VALUES
                     (
-                        @producto_id,
-                        @imagen
+                        $1,$2
                     )
-                `);
+                    `,
+                    [
+                        productoId,
+                        img.ruta
+                    ]
+                );
+
+            }
 
         }
 
         res.json({
-
             mensaje: "Producto agregado correctamente"
-
         });
 
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(error);
 
         res.status(500).json({
-
             error: error.message
-
         });
 
     }
@@ -259,119 +195,85 @@ async function agregarProducto(req, res) {
 // ======================
 
 async function editarProducto(req, res) {
+    console.log("ENTRÓ A EDITAR");
+    console.log(req.params.id);
+    console.log(req.body);
 
     try {
 
-        const conexion = await getConnection();
+        const id = req.params.id;
 
-        // Actualizar datos del producto
-        await conexion
-            .request()
+        const {
+            nombre,
+            descripcion,
+            precio,
+            categoria,
+            stock,
+            imagenes
+        } = req.body;
 
-            .input(
-                "id",
-                sql.Int,
-                req.params.id
-            )
+        // Actualizar producto
+        await pool.query(
+            `
+            UPDATE productos
+            SET
+                nombre = $1,
+                descripcion = $2,
+                precio = $3,
+                categoria = $4,
+                stock = $5
+            WHERE id = $6
+            `,
+            [
+                nombre,
+                descripcion,
+                precio,
+                categoria,
+                stock,
+                id
+            ]
+        );
 
-            .input(
-                "nombre",
-                sql.VarChar,
-                req.body.nombre
-            )
+        // Si llegan imágenes nuevas
+        if (imagenes && imagenes.length > 0) {
 
-            .input(
-                "descripcion",
-                sql.NVarChar(sql.MAX),
-                req.body.descripcion
-            )
-
-            .input(
-                "precio",
-                sql.Decimal(10, 2),
-                req.body.precio
-            )
-
-            .input(
-                "categoria",
-                sql.VarChar,
-                req.body.categoria
-            )
-
-            .input(
-                "stock",
-                sql.Int,
-                req.body.stock
-            )
-
-            .query(`
-                UPDATE productos
-                SET
-                    nombre=@nombre,
-                    descripcion=@descripcion,
-                    precio=@precio,
-                    categoria=@categoria,
-                    stock=@stock
-                WHERE id=@id
-            `);
-
-        // Si llegaron imágenes nuevas
-        if (req.body.imagenes && req.body.imagenes.length > 0) {
-
-            // Borra las imágenes anteriores
-            await conexion
-                .request()
-
-                .input(
-                    "id",
-                    sql.Int,
-                    req.params.id
-                )
-
-                .query(`
-                    DELETE FROM imagenes_producto
-                    WHERE producto_id=@id
-                `);
+            // Borra las imágenes viejas
+            await pool.query(
+                `
+                DELETE FROM imagenes_producto
+                WHERE producto_id = $1
+                `,
+                [id]
+            );
 
             // Guarda las nuevas
-            for (const img of req.body.imagenes) {
+            for (const img of imagenes) {
 
-                await conexion
-                    .request()
-
-                    .input(
-                        "producto_id",
-                        sql.Int,
-                        req.params.id
+                await pool.query(
+                    `
+                    INSERT INTO imagenes_producto
+                    (
+                        producto_id,
+                        imagen
                     )
-
-                    .input(
-                        "imagen",
-                        sql.VarChar,
+                    VALUES
+                    (
+                        $1,
+                        $2
+                    )
+                    `,
+                    [
+                        id,
                         img.ruta
-                    )
-
-                    .query(`
-                        INSERT INTO imagenes_producto
-                        (
-                            producto_id,
-                            imagen
-                        )
-                        VALUES
-                        (
-                            @producto_id,
-                            @imagen
-                        )
-                    `);
+                    ]
+                );
 
             }
 
         }
 
         res.json({
-
-            mensaje: "Producto actualizado"
-
+            mensaje: "Producto actualizado correctamente"
         });
 
     }
@@ -380,14 +282,13 @@ async function editarProducto(req, res) {
         console.error(error);
 
         res.status(500).json({
-
             error: error.message
-
         });
 
     }
 
 }
+
 
 // ======================
 // ELIMINAR PRODUCTO
@@ -397,21 +298,33 @@ async function eliminarProducto(req, res) {
 
     try {
 
-        const conexion = await getConnection();
+        const id = req.params.id;
 
-        await conexion
-            .request()
+        console.log("ELIMINANDO:", id);
 
-            .input(
-                "id",
-                sql.Int,
-                req.params.id
-            )
+        const borrarImagenes = await pool.query(
+            `
+            DELETE FROM imagenes_producto
+            WHERE producto_id = $1
+            RETURNING *;
+            `,
+            [id]
+        );
 
-            .query(`
-                DELETE FROM productos
-                WHERE id=@id
-            `);
+        console.log("Imagenes eliminadas:");
+        console.log(borrarImagenes.rows);
+
+        const borrarProducto = await pool.query(
+            `
+            DELETE FROM productos
+            WHERE id = $1
+            RETURNING *;
+            `,
+            [id]
+        );
+
+        console.log("Producto eliminado:");
+        console.log(borrarProducto.rows);
 
         res.json({
             mensaje: "Producto eliminado"
@@ -430,11 +343,9 @@ async function eliminarProducto(req, res) {
 }
 
 module.exports = {
-
     listarProductos,
     obtenerProducto,
     agregarProducto,
     editarProducto,
     eliminarProducto
-
 };

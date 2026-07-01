@@ -1,4 +1,4 @@
-const { getConnection } = require("../config/db");
+const pool = require("../config/db");
 
 // ======================
 // LISTAR CATEGORÍAS
@@ -8,27 +8,23 @@ async function listarCategorias(req, res) {
 
     try {
 
-        const conexion = await getConnection();
+        const resultado = await pool.query(`
+            SELECT *
+            FROM categorias
+            ORDER BY nombre
+        `);
 
-        const resultado = await conexion
-            .request()
-            .query(`
-                SELECT *
-                FROM categorias
-                ORDER BY nombre
-            `);
-        
-            console.log(resultado.recordset);
+        console.log(resultado.rows);
 
-        res.json(resultado.recordset);
+        res.json(resultado.rows);
 
     }
-    catch(error){
+    catch (error) {
 
         console.error(error);
 
         res.status(500).json({
-            error:error.message
+            error: error.message
         });
 
     }

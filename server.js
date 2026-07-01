@@ -2,11 +2,14 @@ const express = require("express");
 const session = require("express-session");
 const path = require("path");
 const multer = require("multer");
-const productosRoutes = require("./routes/productos");
-const categoriasRoutes = require("./routes/categorias");
 require("dotenv").config();
 
+const productosRoutes = require("./routes/productos");
+const categoriasRoutes = require("./routes/categorias");
+
 const app = express();
+
+app.set("trust proxy", 1);
 
 // ======================
 // MIDDLEWARES
@@ -17,9 +20,13 @@ app.use(express.json());
 
 app.use(
     session({
-        secret: process.env.SESSION_SECRET,
+        secret: process.env.SESSION_SECRET || "trimpresiones",
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: {
+            secure: false, // Cambiar a true cuando uses HTTPS en producción
+            maxAge: 1000 * 60 * 60 * 24 // 24 horas
+        }
     })
 );
 
@@ -62,13 +69,13 @@ app.get("/", (req, res) => {
 
 const storage = multer.diskStorage({
 
-    destination: (req, file, cb) => {
+    destination(req, file, cb) {
 
         cb(null, path.join(__dirname, "public", "uploads"));
 
     },
 
-    filename: (req, file, cb) => {
+    filename(req, file, cb) {
 
         const nombre =
             Date.now() +
@@ -81,17 +88,24 @@ const storage = multer.diskStorage({
 
 });
 
-const upload = multer({
-    storage
-});
+const upload = multer({ storage });
 
 // ======================
-// SUBIR IMAGEN
+// SUBIR IMÁGENES
 // ======================
+
 app.post(
     "/api/upload",
     upload.array("imagenes", 10),
     (req, res) => {
+
+        if (!req.files || req.files.length === 0) {
+
+            return res.status(400).json({
+                error: "No se recibieron imágenes."
+            });
+
+        }
 
         const rutas = req.files.map(file => ({
             ruta: "uploads/" + file.filename
@@ -101,6 +115,7 @@ app.post(
 
     }
 );
+
 // ======================
 // LOGIN
 // ======================
@@ -133,10 +148,10 @@ app.post("/login", (req, res) => {
 });
 
 // ======================
-// ADMIN
+// MIDDLEWARE LOGIN
 // ======================
 
-app.get("/admin", (req, res) => {
+function verificarLogin(req, res, next) {
 
     if (!req.session.usuario) {
 
@@ -144,11 +159,25 @@ app.get("/admin", (req, res) => {
 
     }
 
-    res.sendFile(
-        path.join(__dirname, "admin", "admin.html")
-    );
+    next();
 
-});
+}
+
+// ======================
+// PANEL ADMIN
+// ======================
+
+app.get(
+    "/admin",
+    verificarLogin,
+    (req, res) => {
+
+        res.sendFile(
+            path.join(__dirname, "admin", "admin.html")
+        );
+
+    }
+);
 
 // ======================
 // LOGOUT
@@ -165,12 +194,24 @@ app.get("/logout", (req, res) => {
 });
 
 // ======================
-// API PRODUCTOS
+// API
 // ======================
 
 app.use("/api/productos", productosRoutes);
 
 app.use("/api/categorias", categoriasRoutes);
+
+// ======================
+// ERROR 404
+// ======================
+
+app.use((req, res) => {
+
+    res.status(404).json({
+        error: "Ruta no encontrada"
+    });
+
+});
 
 // ======================
 // SERVIDOR
@@ -180,6 +221,6 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
 
-    console.log(`Servidor iniciado en puerto ${PORT}`);
+    console.log(`🚀 Servidor iniciado en http://localhost:${PORT}`);
 
 });

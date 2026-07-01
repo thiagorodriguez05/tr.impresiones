@@ -536,6 +536,9 @@ footer {
   cursor: pointer;
 }
 
+.modal-desc{
+    white-space: pre-line;
+}
 
 .menu-overlay{
     position: fixed;
