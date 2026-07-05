@@ -16,7 +16,6 @@ pool.connect()
         console.error("❌ Error conectando a PostgreSQL:");
         console.error(err);
     });
-console.log("DATABASE_URL:");
-console.log(process.env.DATABASE_URL);
+console.log("DATABASE_URL cargada:", !!process.env.DATABASE_URL);
 
 module.exports = pool;
