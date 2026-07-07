@@ -8,6 +8,8 @@ body{
     font-family:'Outfit',sans-serif;
     background:#0a0a0f;
     color:#fff;
+
+    overflow-y:scroll;
 }
 
 .dashboard{

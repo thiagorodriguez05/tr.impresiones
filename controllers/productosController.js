@@ -166,7 +166,7 @@ async function agregarProducto(req, res) {
                     `,
                     [
                         productoId,
-                        img.ruta
+                        img
                     ]
                 );
 
@@ -264,7 +264,7 @@ async function editarProducto(req, res) {
                     `,
                     [
                         id,
-                        img.ruta
+                        img
                     ]
                 );
 

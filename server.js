@@ -4,8 +4,8 @@ const path = require("path");
 const multer = require("multer");
 require("dotenv").config();
 
-const productosRoutes = require("./routes/productos");
-const categoriasRoutes = require("./routes/categorias");
+const productosRoutes = require("./routes/productosRoutes");
+const categoriasRoutes = require("./routes/categoriasRoutes");
 
 const app = express();
 
