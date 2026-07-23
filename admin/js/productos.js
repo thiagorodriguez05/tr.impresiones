@@ -99,9 +99,26 @@ function crearFilaProducto(producto) {
 
             </td>
 
+
             <td>
 
                 ${producto.nombre}
+
+            </td>
+
+            <td>
+
+                ${producto.material
+                    ? producto.material.toUpperCase()
+                    : "-"}
+
+            </td>
+
+            <td>
+
+                ${producto.gramos
+                    ? `${producto.gramos} g`
+                    : "-"}
 
             </td>
 
@@ -182,8 +199,15 @@ function obtenerDatosProducto(prefijo) {
         descripcion:
             $(`${prefijo}-descripcion`)
                 .value
-                .trim()
+                .trim(),
 
+        material:
+            $(`${prefijo}-material`)?.value || null,
+
+        gramos:
+            Number(
+                $(`${prefijo}-gramos`)?.value || 0
+            )
     };
 
 }
@@ -194,10 +218,9 @@ function obtenerDatosProducto(prefijo) {
 
 async function subirImagenesProducto() {
 
-    const archivo =
-        $("add-imagen").files[0];
+    const archivos = $("add-imagen").files;
 
-    if (!archivo) {
+    if (!archivos.length) {
 
         return [];
 
@@ -205,10 +228,14 @@ async function subirImagenesProducto() {
 
     const formData = new FormData();
 
-    formData.append(
-        "imagenes",
-        archivo
-    );
+    for (const archivo of archivos) {
+
+        formData.append(
+            "imagenes",
+            archivo
+        );
+
+    }
 
     const respuesta =
         await apiSubirImagenes(formData);
@@ -294,17 +321,21 @@ async function guardarProducto() {
         const producto =
             obtenerDatosProducto("edit");
 
-        const archivo =
-            $("edit-imagen")?.files[0];
+        const archivos =
+            $("edit-imagen")?.files;
 
-        if (archivo) {
+        if (archivos && archivos.length > 0) {
 
             const formData = new FormData();
 
-            formData.append(
-                "imagenes",
-                archivo
-            );
+            for (const archivo of archivos) {
+
+                formData.append(
+                    "imagenes",
+                    archivo
+                );
+
+            }
 
             const respuesta =
                 await apiSubirImagenes(formData);
@@ -430,6 +461,33 @@ function iniciarProductos() {
             guardarProducto
         );
 
+    // ===============================
+    // CALCULAR PRECIOS AUTOMÁTICAMENTE
+    // ===============================
+
+    $("add-material")
+        ?.addEventListener(
+            "change",
+            () => calcularPrecioProducto("add")
+        );
+
+    $("add-gramos")
+        ?.addEventListener(
+            "input",
+            () => calcularPrecioProducto("add")
+        );
+
+    $("edit-material")
+        ?.addEventListener(
+            "change",
+            () => calcularPrecioProducto("edit")
+        );
+
+    $("edit-gramos")
+        ?.addEventListener(
+            "input",
+            () => calcularPrecioProducto("edit")
+        );
 }
 
 // ====================================

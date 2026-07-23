@@ -118,32 +118,38 @@ async function agregarProducto(req, res) {
             precio,
             categoria,
             stock,
+            material,
+            gramos,
             imagenes
         } = req.body;
 
         const resultado = await pool.query(
-            `
-            INSERT INTO productos
-            (
-                nombre,
-                descripcion,
-                precio,
-                categoria,
-                stock
-            )
-            VALUES
-            (
-                $1,$2,$3,$4,$5
-            )
-            RETURNING id
-            `,
-            [
-                nombre,
-                descripcion,
-                precio,
-                categoria,
-                stock
-            ]
+        `
+        INSERT INTO productos
+        (
+            nombre,
+            descripcion,
+            precio,
+            categoria,
+            stock,
+            material,
+            gramos
+        )
+        VALUES
+        (
+            $1,$2,$3,$4,$5,$6,$7
+        )
+        RETURNING id
+        `,
+        [
+            nombre,
+            descripcion,
+            precio,
+            categoria,
+            stock,
+            material,
+            gramos
+        ]
         );
 
         const productoId = resultado.rows[0].id;
@@ -209,29 +215,35 @@ async function editarProducto(req, res) {
             precio,
             categoria,
             stock,
+            material,
+            gramos,
             imagenes
         } = req.body;
 
         // Actualizar producto
         await pool.query(
-            `
-            UPDATE productos
-            SET
-                nombre = $1,
-                descripcion = $2,
-                precio = $3,
-                categoria = $4,
-                stock = $5
-            WHERE id = $6
-            `,
-            [
-                nombre,
-                descripcion,
-                precio,
-                categoria,
-                stock,
-                id
-            ]
+        `
+        UPDATE productos
+        SET
+            nombre=$1,
+            descripcion=$2,
+            precio=$3,
+            categoria=$4,
+            stock=$5,
+            material=$6,
+            gramos=$7
+        WHERE id=$8
+        `,
+        [
+            nombre,
+            descripcion,
+            precio,
+            categoria,
+            stock,
+            material,
+            gramos,
+            id
+        ]
         );
 
         // Si llegan imágenes nuevas

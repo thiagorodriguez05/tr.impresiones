@@ -184,3 +184,44 @@ async function apiSubirImagenes(formData) {
     });
 
 }
+
+// ====================================
+// API - CONFIGURACIÓN
+// ====================================
+
+// Obtener configuración
+async function apiObtenerConfiguracion() {
+
+    return request("/api/configuracion");
+
+}
+
+// Actualizar configuración
+async function apiActualizarConfiguracion(configuracion) {
+
+    return request("/api/configuracion", {
+
+        method: "PUT",
+
+        headers: {
+
+            "Content-Type": "application/json"
+
+        },
+
+        body: JSON.stringify(configuracion)
+
+    });
+
+}
+
+// Recalcular precios
+async function apiRecalcularPrecios() {
+
+    return request("/api/configuracion/recalcular-precios", {
+
+        method: "PUT"
+
+    });
+
+}

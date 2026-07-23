@@ -28,9 +28,7 @@
         MODAL EDITAR
 ============================ -->
 
-<div
-    id="modalEditar"
-    class="modal hidden">
+<div id="modalEditar" class="modal hidden">
 
     <div class="modal-content">
 
@@ -55,18 +53,57 @@
 
         <select id="edit-categoria"></select>
 
-        <img
-            id="preview-imagen"
-            class="preview-imagen"
-            src=""
-            alt="Vista previa">
+        <label>Imágenes actuales</label>
 
-        <label>Precio</label>
+        <div
+            id="previewEditar"
+            class="preview-galeria">
+        </div>
+
+        <label>Agregar nuevas imágenes</label>
+
+        <input
+            type="file"
+            id="edit-imagen"
+            name="imagenes"
+            multiple
+            accept="image/*">
+
+        <label>Material</label>
+
+        <select id="edit-material">
+
+            <option value="pla">PLA</option>
+            <option value="petg">PETG</option>
+            <option value="tpu">TPU</option>
+
+        </select>
+
+        <label>Gramos</label>
 
         <input
             type="number"
-            id="edit-precio"
-            required>
+            id="edit-gramos"
+            min="0"
+            step="0.1">
+
+    <div class="precio-box">
+
+        <label>Precio calculado</label>
+
+        <div
+            id="precio-calculado-edit"
+            class="precio-calculado">
+
+            $0
+
+        </div>
+
+    </div>
+
+    <input
+        type="hidden"
+        id="edit-precio">
 
         <label>Stock</label>
 
@@ -116,12 +153,29 @@
             id="add-nombre"
             autocomplete="off">
 
-        <label>Precio</label>
+        <label>Material</label>
+        <select id="add-material">
+            <option value="pla">PLA</option>
+            <option value="petg">PETG</option>
+            <option value="tpu">TPU</option>
+        </select>
 
-        <input
-            type="number"
-            id="add-precio"
-            required>
+        <label>Gramos</label>
+        <input type="number" id="add-gramos" min="0" step="0.1">
+
+        <div class="precio-box">
+
+            <label>Precio calculado</label>
+
+            <div id="precio-calculado" class="precio-calculado">
+
+                $0
+
+            </div>
+
+        </div>
+
+        <input type="hidden" id="add-precio">
 
         <label>Stock</label>
 
@@ -348,6 +402,8 @@
 
                         <th>Imagen</th>
                         <th>Nombre</th>
+                        <th>Material</th>
+                        <th>Gramos</th>
                         <th>Precio</th>
                         <th>Stock</th>
                         <th>Estado</th>
@@ -524,63 +580,59 @@
             CONFIGURACIÓN
     ========================== -->
 
-    <section
-        id="configuracion-section"
-        class="content-section hidden">
+ <section
+    id="configuracion-section"
+    class="content-section hidden">
 
-        <div class="topbar">
+    <div class="topbar">
+        <h1>Configuración</h1>
+    </div>
 
-            <h1>Configuración</h1>
+    <section class="panel">
 
+        <h2>Configuración de costos</h2>
+
+        <div class="form-group">
+            <label>Precio PLA (kg)</label>
+            <input type="number" id="cfg-precio-pla">
         </div>
 
-        <section class="panel">
+        <div class="form-group">
+            <label>Precio PETG (kg)</label>
+            <input type="number" id="cfg-precio-petg">
+        </div>
 
-            <h2>Sistema</h2>
+        <div class="form-group">
+            <label>Precio TPU (kg)</label>
+            <input type="number" id="cfg-precio-tpu">
+        </div>
 
-            <br>
+        <div class="form-group">
+            <label>Multiplicador</label>
+            <input type="number" id="cfg-margen">
+        </div>
 
-            <p>
+        <br>
 
-                Panel desarrollado para
-                <strong>TR Impresiones</strong>.
+        <button
+            id="btnGuardarConfiguracion"
+            class="btn-add">
 
-            </p>
+            💾 Guardar configuración
 
-            <br>
+        </button>
 
-            <p>
+        <button
+        class="btn-secondary"
+        id="btnRecalcular">
 
-                Base de datos:
-                <strong>PostgreSQL</strong>
+        🔄 Recalcular precios
 
-            </p>
-
-            <br>
-
-            <p>
-
-                Estado:
-
-                <span
-                    style="
-                        color:#22c55e;
-                        font-weight:bold;
-                    ">
-
-                    ● Conectado
-
-                </span>
-
-            </p>
-
-        </section>
+        </button>
 
     </section>
 
-</main>
-
-</div>
+</section>
 
 <!-- =========================
         LOADER
@@ -670,11 +722,12 @@
 <script src="js/ui.js"></script>
 <script src="js/api.js"></script>
 
-<script src="js/productos.js"></script>
-<script src="js/categorias.js"></script>
-
 <script src="js/modalProducto.js"></script>
 <script src="js/modalCategoria.js"></script>
+
+<script src="js/productos.js"></script>
+<script src="js/categorias.js"></script>
+<script src="js/configuracion.js"></script>
 
 <script src="js/admin.js"></script>
 </body>

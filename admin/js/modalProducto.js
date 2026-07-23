@@ -27,6 +27,8 @@ async function abrirModalEditarProducto(id) {
 
         cargarFormularioEditar(producto);
 
+        calcularPrecioProducto("edit");
+
         actualizarPreview(producto.imagenes);
 
         abrirModal("modalEditar");
@@ -64,9 +66,6 @@ function cargarFormularioEditar(producto) {
     $("edit-nombre").value =
         producto.nombre;
 
-    $("edit-precio").value =
-        producto.precio;
-
     $("edit-stock").value =
         producto.stock;
 
@@ -76,6 +75,18 @@ function cargarFormularioEditar(producto) {
     $("edit-categoria").value =
         producto.categoria;
 
+    $("edit-material").value =
+        producto.material || "pla";
+
+    $("edit-gramos").value =
+        producto.gramos || 0;
+
+    $("edit-precio").value =
+        producto.precio;
+
+    $("precio-calculado-edit").textContent =
+        `$${formatearPrecio(producto.precio)}`;
+
 }
 
 // ====================================
@@ -84,13 +95,38 @@ function cargarFormularioEditar(producto) {
 
 function actualizarPreview(imagenes) {
 
-    $("preview-imagen").src =
+    const contenedor =
+        $("previewEditar");
 
-        imagenes && imagenes.length > 0
+    if (!contenedor) return;
 
-            ? "/" + imagenes[0]
+    contenedor.innerHTML = "";
 
-            : "/img/no-image.png";
+    if (!imagenes || imagenes.length === 0) {
+
+        contenedor.innerHTML = `
+
+            <img
+                src="/img/no-image.png"
+                class="preview-imagen">
+
+        `;
+
+        return;
+
+    }
+
+    imagenes.forEach(imagen => {
+
+        contenedor.innerHTML += `
+
+            <img
+                src="/${imagen}"
+                class="preview-imagen">
+
+        `;
+
+    });
 
 }
 
@@ -110,11 +146,11 @@ function cerrarModalEditarProducto() {
 
 function abrirModalAgregarProducto() {
 
-    limpiarFormulario(
-        CAMPOS_PRODUCTO
-    );
+    limpiarFormulario(CAMPOS_PRODUCTO);
 
     abrirModal("modalAgregar");
+
+    calcularPrecioProducto("add");
 
 }
 
@@ -129,5 +165,87 @@ function cerrarModalAgregarProducto() {
     );
 
     cerrarModal("modalAgregar");
+
+}
+
+// ====================================
+// CALCULAR PRECIO
+// ====================================
+
+function redondearPrecio(precio) {
+
+    return Math.round(precio / 500) * 500;
+
+}
+
+
+async function calcularPrecioProducto(prefijo) {
+
+    try {
+
+        const config = await apiObtenerConfiguracion();
+
+        console.log(config);
+
+        const material =
+            $(`${prefijo}-material`).value;
+
+        const gramos =
+            Number(
+                $(`${prefijo}-gramos`).value
+            ) || 0;
+
+            let precioKg = 0;
+
+            switch (material) {
+
+                case "pla":
+                    precioKg = Number(config.precio_pla);
+                    break;
+
+                case "petg":
+                    precioKg = Number(config.precio_petg);
+                    break;
+
+                case "tpu":
+                    precioKg = Number(config.precio_tpu);
+                    break;
+
+            }
+
+            const costoMaterial =
+                (precioKg / 1000) * gramos;
+
+            const costoTotal =
+                costoMaterial;
+
+            const precioFinal =
+                redondearPrecio(
+                    costoTotal * Number(config.margen)
+                );
+                
+            $(`${prefijo}-precio`).value =
+                precioFinal;
+
+            if (prefijo === "add") {
+
+                $("precio-calculado").textContent =
+                    `$${formatearPrecio(precioFinal)}`;
+
+            }
+            else {
+
+                $("precio-calculado-edit").textContent =
+                    `$${formatearPrecio(precioFinal)}`;
+
+            }
+
+
+    }
+    catch (error) {
+
+        console.error(error);
+
+    }
 
 }
