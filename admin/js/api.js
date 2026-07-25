@@ -225,3 +225,87 @@ async function apiRecalcularPrecios() {
     });
 
 }
+
+// ====================================
+// API - PEDIDOS
+// ====================================
+
+// Obtener todos
+async function apiObtenerPedidos() {
+
+    return request("/api/pedidos");
+
+}
+
+// Obtener uno
+async function apiObtenerPedido(id) {
+
+    return request(`/api/pedidos/${id}`);
+
+}
+
+// Crear
+async function apiCrearPedido(pedido) {
+
+    return request("/api/pedidos", {
+
+        method: "POST",
+
+        headers: {
+
+            "Content-Type": "application/json"
+
+        },
+
+        body: JSON.stringify(pedido)
+
+    });
+
+}
+
+// Actualizar
+async function apiActualizarPedido(id, pedido) {
+
+    return request(`/api/pedidos/${id}`, {
+
+        method: "PUT",
+
+        headers: {
+
+            "Content-Type": "application/json"
+
+        },
+
+        body: JSON.stringify(pedido)
+
+    });
+
+}
+
+// Eliminar
+async function apiEliminarPedido(id) {
+
+    return request(`/api/pedidos/${id}`, {
+
+        method: "DELETE"
+
+    });
+
+}
+
+// Cambiar estado
+async function apiCambiarEstadoPedido(id) {
+
+    return request(`/api/pedidos/${id}/estado`, {
+
+        method: "PUT"
+
+    });
+
+}
+
+async function apiDashboard(){
+
+    return request("/api/dashboard");
+
+}

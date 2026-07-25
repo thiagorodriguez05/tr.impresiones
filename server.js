@@ -7,7 +7,10 @@ require("dotenv").config();
 const productosRoutes = require("./routes/productosRoutes");
 const categoriasRoutes = require("./routes/categoriasRoutes");
 const configuracionRoutes = require("./routes/configuracionRoutes");
+const pedidosRoutes = require("./routes/pedidosRoutes");
+const dashboardRoutes =require("./routes/dashboardRoutes");
 const app = express();
+
 
 app.set("trust proxy", 1);
 
@@ -202,6 +205,10 @@ app.use("/api/productos", productosRoutes);
 app.use("/api/categorias", categoriasRoutes);
 
 app.use("/api/configuracion", configuracionRoutes);
+
+app.use("/api/pedidos", pedidosRoutes);
+
+app.use("/api/dashboard", dashboardRoutes);
 // ======================
 // ERROR 404
 // ======================

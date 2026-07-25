@@ -22,36 +22,36 @@ const actualizarConfiguracion = async (req, res) => {
         precio_pla,
         precio_petg,
         precio_tpu,
-        costo_hora,
         margen
     } = req.body;
 
     try {
         await pool.query(
-            `UPDATE configuracion
-             SET precio_pla = $1,
-                 precio_petg = $2,
-                 precio_tpu = $3,
-                 costo_hora = $4,
-                 margen = $5
-             WHERE id = 1`,
-            [
-                precio_pla,
-                precio_petg,
-                precio_tpu,
-                costo_hora,
-                margen
-            ]
+        `
+        UPDATE configuracion
+        SET precio_pla = $1,
+            precio_petg = $2,
+            precio_tpu = $3,
+            margen = $4
+        WHERE id = 1`,
+        [
+            precio_pla,
+            precio_petg,
+            precio_tpu,
+            margen
+        ]
         );
 
         res.json({
             mensaje: "Configuración actualizada correctamente"
         });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            mensaje: "Error al actualizar la configuración"
-        });
+        console.error("ERROR CONFIGURACION:");
+            console.error(error);
+
+            res.status(500).json({
+                mensaje: error.message
+            });
     }
 };
 

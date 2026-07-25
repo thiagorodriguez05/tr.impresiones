@@ -68,15 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarConfiguracion();
 
     $("btnGuardarConfiguracion")
-        .addEventListener(
+        ?.addEventListener(
             "click",
             guardarConfiguracion
         );
 
-    $("btnRecalcularPrecios")
-        .addEventListener(
+    $("btnRecalcular")
+        ?.addEventListener(
             "click",
             recalcularPrecios
         );
-
 });

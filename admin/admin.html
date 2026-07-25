@@ -281,14 +281,6 @@
 
             <a
                 href="#"
-                data-section="clientes">
-
-                👥 Clientes
-
-            </a>
-
-            <a
-                href="#"
                 data-section="configuracion">
 
                 ⚙️ Configuración
@@ -479,11 +471,20 @@
         id="pedidos-section"
         class="content-section hidden">
 
-        <div class="topbar">
+    <div class="topbar">
 
-            <h1>Pedidos</h1>
+        <h1>Pedidos</h1>
 
-        </div>
+        <button
+            class="btn-add"
+            id="btnAbrirAgregarPedido">
+
+            ➕ Nuevo Pedido
+
+        </button>
+
+    </div>
+
 
         <section class="panel">
 
@@ -511,58 +512,6 @@
                         <td colspan="6">
 
                             Todavía no hay pedidos.
-
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </section>
-
-    </section>
-
-    <!-- =========================
-            CLIENTES
-    ========================== -->
-
-    <section
-        id="clientes-section"
-        class="content-section hidden">
-
-        <div class="topbar">
-
-            <h1>Clientes</h1>
-
-        </div>
-
-        <section class="panel">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
-                        <th>Acciones</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="tabla-clientes">
-
-                    <tr>
-
-                        <td colspan="5">
-
-                            Todavía no hay clientes.
 
                         </td>
 
@@ -715,6 +664,138 @@
     </div>
 
 </div>
+
+<div id="modalAgregarPedido" class="modal hidden">
+
+    <div class="modal-content modal-pedido">
+
+        <h2>🛒 Nuevo Pedido</h2>
+
+        <input
+            type="hidden"
+            id="pedido-id">
+
+        <hr>
+        <h3>👤 Datos del Cliente</h3>
+
+        <label>Nombre</label>
+
+        <input
+            type="text"
+            id="pedido-add-nombre">
+
+        <label>Teléfono</label>
+
+        <input
+            type="text"
+            id="pedido-add-telefono">
+
+        <label>Email</label>
+
+        <input
+            type="email"
+            id="pedido-add-email">
+
+        <label>Dirección</label>
+
+        <textarea
+            id="pedido-add-direccion">
+        </textarea>
+
+        <hr>
+
+        <h3>📦 Productos</h3>
+
+        <table class="tabla-pedido">
+
+            <thead>
+
+                <tr>
+
+                    <th>Producto</th>
+
+                    <th>Cantidad</th>
+
+                    <th>Precio</th>
+
+                    <th>Subtotal</th>
+
+                    <th></th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="detallePedido">
+
+            </tbody>
+
+        </table>
+
+        <button
+            type="button"
+            id="btnAgregarFilaPedido"
+            class="btn-add">
+
+            ➕ Agregar producto
+
+        </button>
+
+        <br><br>
+
+        <label>Estado</label>
+
+        <select id="pedido-add-estado">
+
+            <option value="Pendiente">
+                Pendiente
+            </option>
+
+            <option value="Entregado">
+                Entregado
+            </option>
+
+        </select>
+
+        <hr>
+
+        <div class="pedido-total">
+
+            <h2>
+
+                Total
+
+            </h2>
+
+            <h2 id="pedido-total">
+
+                $0
+
+            </h2>
+
+        </div>
+
+        <div class="modal-buttons">
+
+            <button
+                id="btnCancelarAgregarPedido">
+
+                Cancelar
+
+            </button>
+
+            <button
+                id="btnGuardarPedido">
+
+                Guardar Pedido
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 <!-- =========================
         SCRIPTS
 ========================= -->
@@ -724,10 +805,13 @@
 
 <script src="js/modalProducto.js"></script>
 <script src="js/modalCategoria.js"></script>
+<script src="js/modalPedido.js"></script>
 
 <script src="js/productos.js"></script>
 <script src="js/categorias.js"></script>
+<script src="js/pedidos.js"></script>
 <script src="js/configuracion.js"></script>
+<script src="js/dashboard.js"></script>
 
 <script src="js/admin.js"></script>
 </body>

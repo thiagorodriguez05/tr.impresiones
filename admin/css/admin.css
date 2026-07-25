@@ -1200,3 +1200,56 @@ input[type=file]{
 
 }
 
+.badge-pendiente{
+
+    background:#3b1111;
+    color:#ff7070;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-weight:600;
+
+}
+
+.badge-entregado{
+
+    background:#143d22;
+    color:#63d68a;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-weight:600;
+
+}
+
+.btn-entregar{
+
+    background:#1f8d49;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:8px 10px;
+
+    cursor:pointer;
+
+    margin:0 5px;
+
+    transition:.2s;
+
+}
+
+.btn-entregar:hover{
+
+    transform:scale(1.05);
+
+    background:#27b45d;
+
+}

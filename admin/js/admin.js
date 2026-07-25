@@ -8,4 +8,8 @@ function iniciarAdmin() {
 
     iniciarCategorias();
 
+    iniciarPedidos();
+
+    cargarDashboard();
+
 }
