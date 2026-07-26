@@ -664,9 +664,13 @@ PROMOCIÓN
 
     display:block;
 
-    width:min(1100px,90%);
+    width:100%;
 
-    margin:40px auto;
+    max-width:1500px;
+
+    margin:30px auto 50px;
+
+    padding:0 20px;
 
 }
 
@@ -680,8 +684,6 @@ PROMOCIÓN
 
     box-shadow:0 15px 40px rgba(0,0,0,.35);
 
-    transition:.35s ease;
-
 }
 
 .promo-banner:hover .promo-banner-img{
@@ -689,5 +691,19 @@ PROMOCIÓN
     transform:translateY(-3px);
 
     box-shadow:0 25px 55px rgba(124,58,237,.35);
+
+}
+
+.promo-banner-img{
+
+    transition:.3s ease;
+
+}
+
+.promo-banner-img:hover{
+
+    transform:scale(1.01);
+
+    box-shadow:0 25px 60px rgba(124,58,237,.35);
 
 }
