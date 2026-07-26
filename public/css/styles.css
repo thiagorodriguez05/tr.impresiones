@@ -612,39 +612,9 @@ footer {
   border-color: #a78bfa;
 }
 
-/* =========================================
-   PROMOCIÓN
-========================================= */
-
-.card{
-    position: relative;
-}
-
-.promo-badge{
-
-    position:absolute;
-
-    top:12px;
-
-    right:12px;
-
-    background:#ff3b5c;
-
-    color:white;
-
-    font-weight:700;
-
-    padding:8px 12px;
-
-    border-radius:12px;
-
-    font-size:14px;
-
-    z-index:5;
-
-    box-shadow:0 8px 20px rgba(255,59,92,.35);
-
-}
+/*=====================================
+PRECIOS PROMOCIÓN
+=====================================*/
 
 .price-box{
 
@@ -658,150 +628,57 @@ footer {
 
 .old-price{
 
-    color:#888;
+    color:#7d7d7d;
 
     text-decoration:line-through;
 
-    font-size:14px;
+    font-size:15px;
+
+    font-weight:500;
 
 }
 
 .promo-price{
 
-    color:#9b6dff;
+    color:#a78bfa;
 
-    font-size:24px;
+    font-size:30px;
 
     font-weight:700;
 
 }
-
-/*==================================================
-BANNER PROMOCIÓN
-==================================================*/
+/* ==========================================
+   BANNER PROMOCIONAL
+========================================== */
 
 .promo-banner{
 
-    margin:25px auto;
+    display:block;
 
-    width:min(1200px,95%);
+    width:min(1100px,90%);
+
+    margin:40px auto;
+
+}
+
+.promo-banner-img{
+
+    width:100%;
+
+    display:block;
 
     border-radius:22px;
 
-    overflow:hidden;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
 
-    background:linear-gradient(135deg,#7c3aed,#a855f7,#6366f1);
-
-    box-shadow:0 20px 45px rgba(124,58,237,.35);
-
-    animation:bannerGlow 3s ease-in-out infinite alternate;
+    transition:.35s ease;
 
 }
 
-.promo-content{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:25px;
-
-    padding:28px 35px;
-
-}
-
-.promo-icon{
-
-    font-size:60px;
-
-}
-
-.promo-text h2{
-
-    color:white;
-
-    font-size:32px;
-
-    margin-bottom:8px;
-
-}
-
-.promo-text p{
-
-    color:#ececec;
-
-    font-size:18px;
-
-}
-
-.promo-btn{
-
-    background:white;
-
-    color:#6d28d9;
-
-    text-decoration:none;
-
-    padding:14px 28px;
-
-    border-radius:14px;
-
-    font-weight:700;
-
-    transition:.25s;
-
-}
-
-.promo-btn:hover{
+.promo-banner:hover .promo-banner-img{
 
     transform:translateY(-3px);
 
-    box-shadow:0 10px 25px rgba(255,255,255,.35);
-
-}
-
-@keyframes bannerGlow{
-
-    from{
-
-        box-shadow:0 15px 35px rgba(124,58,237,.30);
-
-    }
-
-    to{
-
-        box-shadow:0 20px 55px rgba(168,85,247,.55);
-
-    }
-
-}
-
-@media(max-width:850px){
-
-    .promo-content{
-
-        flex-direction:column;
-
-        text-align:center;
-
-    }
-
-    .promo-text h2{
-
-        font-size:26px;
-
-    }
-
-    .promo-btn{
-
-        width:100%;
-
-        max-width:250px;
-
-        text-align:center;
-
-    }
+    box-shadow:0 25px 55px rgba(124,58,237,.35);
 
 }
