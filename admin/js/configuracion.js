@@ -50,7 +50,9 @@ async function recalcularPrecios() {
         const respuesta =
             await apiRecalcularPrecios();
 
-        alert(respuesta.mensaje);
+        await cargarProductos();
+
+        mostrarToast(respuesta.mensaje);
 
     }
     catch (error) {

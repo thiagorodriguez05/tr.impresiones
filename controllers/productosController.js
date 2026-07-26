@@ -15,13 +15,18 @@ async function listarProductos(req, res) {
             ORDER BY id DESC
         `);
 
+        console.table(
+            productos.rows.map(p => ({
+                id: p.id,
+                nombre: p.nombre,
+                precio: p.precio
+            }))
+        );
+
         const imagenes = await pool.query(`
             SELECT *
             FROM imagenes_producto
         `);
-
-        console.log(productos.rows);
-        console.log(imagenes.rows);
 
         const resultado = productos.rows.map(producto => {
 
@@ -33,7 +38,6 @@ async function listarProductos(req, res) {
                 ...producto,
                 imagenes: fotos
             };
-
         });
 
         res.json(resultado);

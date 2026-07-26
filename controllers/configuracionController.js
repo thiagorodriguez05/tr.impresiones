@@ -106,18 +106,24 @@ const recalcularPrecios = async (req, res) => {
                 (precioKg / 1000) * Number(producto.gramos);
 
             const precio =
-                Math.round(costoMaterial * Number(margen));
+                Math.ceil((costoMaterial * Number(margen)) / 500) * 500;
+
+            console.log(
+                producto.nombre,
+                "=>",
+                precio
+            );
 
             await pool.query(
-                `
-                UPDATE productos
-                SET precio = $1
-                WHERE id = $2
-                `,
-                [
-                    precio,
-                    producto.id
-                ]
+            `
+            UPDATE productos
+            SET precio = $1
+            WHERE id = $2
+            `,
+            [
+                precio,
+                producto.id
+            ]
             );
 
             actualizados++;
