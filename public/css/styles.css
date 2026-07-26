@@ -694,16 +694,24 @@ PROMOCIÓN
 
 }
 
-.promo-banner-img{
+@media (max-width:768px){
 
-    transition:.3s ease;
+    .promo-banner{
 
-}
+        width:100%;
 
-.promo-banner-img:hover{
+        padding:0;
 
-    transform:scale(1.01);
+        margin:15px 0 25px;
 
-    box-shadow:0 25px 60px rgba(124,58,237,.35);
+    }
+
+    .promo-banner-img{
+
+        width:100%;
+
+        border-radius:0;
+
+    }
 
 }
