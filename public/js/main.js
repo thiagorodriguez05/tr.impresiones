@@ -5,6 +5,23 @@
 const WHATSAPP_NUMBER = "57566110";
 
 // ============================================================
+// PROMOCIÓN
+// ============================================================
+
+const PROMO = {
+    activa: true,
+    descuento: 10
+};
+
+function precioPromo(precio) {
+
+    if (!PROMO.activa) return precio;
+
+    return Math.round(precio * (1 - PROMO.descuento / 100));
+
+}
+
+// ============================================================
 // STATE
 // ============================================================
 
@@ -26,6 +43,7 @@ function renderProducts() {
     grid.innerHTML = filtered.map(p => {
 
         const inCart = cart[p.id];
+        const precioConPromo = precioPromo(p.price);
 
         const imgHtml = (p.images && p.images.length > 0)
             ? `<img src="${p.images[0]}" alt="${p.name}" />`
@@ -33,6 +51,12 @@ function renderProducts() {
 
         return `
         <div class="card" onclick="openModal('${p.id}')">
+
+            ${PROMO.activa ? `
+                <div class="discount-badge">
+                    -${PROMO.descuento}%
+                </div>
+            ` : ""}
 
             <div class="card-img">
                 ${imgHtml}
@@ -55,9 +79,27 @@ function renderProducts() {
 
                 <div class="card-footer">
 
-                    <span class="price">
-                        $${p.price.toLocaleString("es-AR")}
-                    </span>
+                    <div class="price-box">
+
+                        ${
+                            PROMO.activa
+                                ? `
+                                    <span class="old-price">
+                                        $${p.price.toLocaleString("es-AR")}
+                                    </span>
+
+                                    <span class="promo-price">
+                                        $${precioConPromo.toLocaleString("es-AR")}
+                                    </span>
+                                `
+                                : `
+                                    <span class="promo-price">
+                                        $${p.price.toLocaleString("es-AR")}
+                                    </span>
+                                `
+                        }
+
+                    </div>
 
                     <button
                         class="add-btn ${inCart ? "added" : ""}"
