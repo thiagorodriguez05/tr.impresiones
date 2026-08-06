@@ -218,12 +218,13 @@ async function calcularPrecioProducto(prefijo) {
 
             const costoTotal =
                 costoMaterial;
-
-            const precioFinal =
-                redondearPrecio(
-                    costoTotal * Number(config.margen)
-                );
                 
+            const margen = Number(config.margen);
+
+            const precioFinal = redondearPrecio(
+                costoTotal * (1 + margen / 100)
+            );
+                            
             $(`${prefijo}-precio`).value =
                 precioFinal;
 

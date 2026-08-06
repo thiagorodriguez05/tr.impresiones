@@ -101,18 +101,21 @@ const recalcularPrecios = async (req, res) => {
                     continue;
 
             }
-
+            
             const costoMaterial =
                 (precioKg / 1000) * Number(producto.gramos);
 
             const precio =
-                Math.ceil((costoMaterial * Number(margen)) / 500) * 500;
+                Math.ceil(
+                    (costoMaterial * (1 + Number(margen) / 100)) / 500
+                ) * 500;
 
-            console.log(
-                producto.nombre,
-                "=>",
-                precio
-            );
+            console.log({
+                gramos: producto.gramos,
+                costoMaterial,
+                margen,
+                precio,
+            });
 
             await pool.query(
             `

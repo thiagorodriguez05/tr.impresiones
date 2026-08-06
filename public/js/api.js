@@ -12,23 +12,23 @@ async function cargarProductos() {
 
         products = data.map(p => ({
 
-            id: p.id,
+        id: p.id,
 
-            name: p.nombre,
+        name: p.nombre,
 
-            price: Number(p.precio),
+        price: Number(p.precio),
 
-            cat: p.categoria.toLowerCase(),
+        cat: p.categoria_slug,
 
-            catName: p.categoria,
+        catName: p.categoria_nombre,
 
-            desc: p.descripcion || "",
+        desc: p.descripcion || "",
 
-            images: (p.imagenes || []).map(img => "/" + img),
+        images: (p.imagenes || []).map(img => "/" + img),
 
-            icon: "🧱"
+        icon: "🧱"
 
-        }));
+    }));
 
         document.getElementById("loader").style.display = "none";
 

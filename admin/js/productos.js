@@ -142,7 +142,7 @@ function crearFilaProducto(producto) {
 
             <td>
 
-                ${producto.categoria}
+                ${producto.categoria_nombre}
 
             </td>
 
@@ -274,8 +274,10 @@ async function agregarProducto() {
 
         }
 
-        producto.imagenes =
+       producto.imagenes =
             await subirImagenesProducto();
+
+        console.log(producto.imagenes);
 
         await apiCrearProducto(producto);
 

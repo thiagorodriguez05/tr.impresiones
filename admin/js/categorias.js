@@ -143,14 +143,10 @@ function cargarSelectCategorias() {
 
 function agregarOpcion(select, categoria) {
 
-    const option =
-        document.createElement("option");
+    const option = document.createElement("option");
 
-    option.value =
-        categoria.nombre;
-
-    option.textContent =
-        categoria.nombre;
+    option.value = categoria.id;      // ✅ Enviar el ID
+    option.textContent = categoria.nombre;
 
     select.appendChild(option);
 

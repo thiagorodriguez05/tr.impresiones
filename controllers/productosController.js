@@ -10,9 +10,14 @@ async function listarProductos(req, res) {
     try {
 
         const productos = await pool.query(`
-            SELECT *
-            FROM productos
-            ORDER BY id DESC
+           SELECT
+            p.*,
+            c.nombre AS categoria_nombre,
+            c.slug AS categoria_slug
+        FROM productos p
+        LEFT JOIN categorias c
+        ON p.categoria = c.id
+        ORDER BY p.id DESC
         `);
 
         console.table(
@@ -32,7 +37,7 @@ async function listarProductos(req, res) {
 
             const fotos = imagenes.rows
                 .filter(img => img.producto_id == producto.id)
-                .map(img => img.imagen);
+                .map(img => img.url);
 
             return {
                 ...producto,
@@ -66,9 +71,14 @@ async function obtenerProducto(req, res) {
 
         const resultado = await pool.query(
             `
-            SELECT *
-            FROM productos
-            WHERE id = $1
+            SELECT
+                p.*,
+                c.nombre AS categoria_nombre,
+                c.slug AS categoria_slug
+            FROM productos p
+            LEFT JOIN categorias c
+            ON p.categoria = c.id
+            WHERE p.id = $1
             `,
             [req.params.id]
         );
@@ -85,14 +95,14 @@ async function obtenerProducto(req, res) {
 
         const imagenes = await pool.query(
             `
-            SELECT imagen
+            SELECT url
             FROM imagenes_producto
             WHERE producto_id = $1
             `,
             [producto.id]
         );
 
-        producto.imagenes = imagenes.rows.map(i => i.imagen);
+       producto.imagenes = imagenes.rows.map(i => i.url);
 
         res.json(producto);
 
@@ -127,6 +137,12 @@ async function agregarProducto(req, res) {
             imagenes
         } = req.body;
 
+        console.log("BODY:");
+        console.log(req.body);
+
+        console.log("IMAGENES:");
+        console.log(imagenes);
+
         const resultado = await pool.query(
         `
         INSERT INTO productos
@@ -156,33 +172,45 @@ async function agregarProducto(req, res) {
         ]
         );
 
-        const productoId = resultado.rows[0].id;
+const productoId = resultado.rows[0].id;
 
-        if (imagenes && imagenes.length > 0) {
+console.log("Producto ID:", productoId);
+console.log("Imagenes recibidas:", imagenes);
 
-            for (const img of imagenes) {
+if (imagenes && imagenes.length > 0) {
 
-                await pool.query(
-                    `
-                    INSERT INTO imagenes_producto
-                    (
-                        producto_id,
-                        imagen
-                    )
-                    VALUES
-                    (
-                        $1,$2
-                    )
-                    `,
-                    [
-                        productoId,
-                        img
-                    ]
-                );
+    for (const img of imagenes) {
 
-            }
+        console.log("Insertando imagen:", img);
 
-        }
+        await pool.query(
+            `
+            INSERT INTO imagenes_producto
+            (
+                producto_id,
+                url
+            )
+            VALUES
+            (
+                $1,
+                $2
+            )
+            `,
+            [
+                productoId,
+                img
+            ]
+        );
+
+    }
+
+    const prueba = await pool.query(
+        "SELECT * FROM imagenes_producto"
+    );
+
+    console.table(prueba.rows);
+
+}
 
         res.json({
             mensaje: "Producto agregado correctamente"
@@ -190,6 +218,7 @@ async function agregarProducto(req, res) {
 
     } catch (error) {
 
+        console.error("ERROR AGREGANDO PRODUCTO");
         console.error(error);
 
         res.status(500).json({
@@ -270,7 +299,7 @@ async function editarProducto(req, res) {
                     INSERT INTO imagenes_producto
                     (
                         producto_id,
-                        imagen
+                        url
                     )
                     VALUES
                     (
